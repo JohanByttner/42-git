@@ -1,0 +1,42 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
+#    Updated: 2015/09/21 17:24:07 by jbyttner         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME=libft
+SRC=ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
+		ft_memchr.c ft_memcmp.c
+ROOTDIR=./
+LIBDIR=$(ROOTDIR)./
+BINDIR=$(ROOTDIR)./
+INCDIR=$(ROOTDIR)./
+BUILDDIR=$(ROOTDIR)./
+DIR=./
+
+OBJ=$(SRC:.c=.o)
+CC=gcc
+CFLAGS=-Wall -Wextra -Werror -c
+AR=ar
+ARFLAGS=rc
+RM=rm -f
+
+all:	$(NAME)
+
+$(NAME):
+	$(CC) $(CFLAGS) -I$(INCDIR) $(SRC)
+	$(AR) $(ARFLAGS) $(LIBDIR)$(NAME) $(OBJ)
+
+clean:
+	$(RM) $(OBJ)
+
+fclean:	clean
+	$(RM) $(LIBDIR)$(NAME)
+
+re: fclean all
