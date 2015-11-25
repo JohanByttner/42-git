@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 15:33:47 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/11/25 15:33:49 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/11/25 15:35:34 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/11/25 15:37:18 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t	i;
-	UCHAR	*result;
+	const char	*start;
 
-	i = 0;
-	result = (UCHAR *)s;
-	while (i < n && result[i] != c)
-		i++;
-	if (i == n)
-		result = 0;
-	return (result);
+	start = 0;
+	while (*big != '\0' && len-- > 0)
+	{
+		if (*little == *big || little == '\0')
+			start = start ? start : big;
+		else
+		{
+			little = start;
+			start = 0;
+		}
+		if (*little == '\0')
+			break ;
+		little++;
+		big++;
+	}
+	start = *little ? 0 : start;
+	return ((char *)start);
 }

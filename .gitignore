@@ -8,6 +8,7 @@ Credited to @Octocat
 *.exe
 *.o
 *.so
+*.pyc
 
 # Packages #
 ############
@@ -37,3 +38,7 @@ Credited to @Octocat
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Temporary Files #
+###################
+*.swp
