@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 15:34:53 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/11/25 16:53:08 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/11/26 19:53:24 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/11/26 20:15:53 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *str)
+char	*ft_strtrim(const char *s)
 {
-	int		length;
-	char	*res;
-	int		i;
+	size_t	start;
+	size_t	end;
 
-	length = ft_strlen(str);
-	res = (char *)malloc(sizeof(char) * (length + 1));
-	i = 0;
-	while (i <= length)
+	start = 0;
+	while (s[start] == ' ' || s[start] == '\n' || s[start] == '\t')
+		start++;
+	end = ft_strlen(s);
+	while ((s[end] == ' ' || s[end] == '\n' || s[end] == '\t') && end > 0)
+		end--;
+	if (end == 0)
 	{
-		res[i] = str[i];
-		i++;
+		start = 0;
+		end = 0;
 	}
-	return (res);
+	return (ft_strsub(s, start, end - start + 1));
 }

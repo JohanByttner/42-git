@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 15:34:53 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/11/25 16:53:08 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/11/25 17:15:31 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/11/25 17:18:28 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *str)
+int	ft_strequ(const char *s1, const char *s2)
 {
-	int		length;
-	char	*res;
-	int		i;
-
-	length = ft_strlen(str);
-	res = (char *)malloc(sizeof(char) * (length + 1));
-	i = 0;
-	while (i <= length)
-	{
-		res[i] = str[i];
-		i++;
-	}
-	return (res);
+	return (!ft_strcmp(s1, s2));
 }

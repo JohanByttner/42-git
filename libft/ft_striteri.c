@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 15:34:53 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/11/25 16:53:08 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/11/25 17:05:52 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/11/25 17:07:46 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *str)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	int		length;
-	char	*res;
-	int		i;
+	unsigned int	i;
 
-	length = ft_strlen(str);
-	res = (char *)malloc(sizeof(char) * (length + 1));
 	i = 0;
-	while (i <= length)
+	while (s[i] != '\0')
 	{
-		res[i] = str[i];
+		f(i, &(s[i]));
 		i++;
 	}
-	return (res);
 }
