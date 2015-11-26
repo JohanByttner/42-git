@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 15:34:53 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/11/25 16:53:08 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/11/25 16:58:10 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/11/25 17:31:22 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *str)
+void	ft_strclr(char *s)
 {
-	int		length;
-	char	*res;
-	int		i;
-
-	length = ft_strlen(str);
-	res = (char *)malloc(sizeof(char) * (length + 1));
-	i = 0;
-	while (i <= length)
-	{
-		res[i] = str[i];
-		i++;
-	}
-	return (res);
+	ft_bzero((void *)s, ft_strlen(s));
 }

@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 15:37:41 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/11/25 16:31:07 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/11/26 20:14:39 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char	*ft_strcpy(char *dest, const char *src);
 
 char	*ft_strncpy(char *dest, const char *src, size_t n);
 
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+
 char	*ft_strcat(char *dest, const char *src);
 
 char	*ft_strncat(char *dest, const char *src, size_t n);
@@ -85,5 +87,37 @@ int		ft_isprint(int c);
 int		ft_toupper(int c);
 
 int		ft_tolower(int c);
+
+/*
+** Below are optional "Extra" functions from libft.pdf
+*/
+
+void	*ft_memalloc(size_t size);
+
+void	ft_memdel(void **ap);
+
+char	*ft_strnew(size_t size);
+
+void	ft_strdel(char **as);
+
+void	ft_strclr(char *s);
+
+void	ft_striter(char *s, void (*f)(char *));
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char *));
+
+char	*ft_strmap(const char *s, char (*f)(char));
+
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
+
+int		ft_strequ(const char *s1, const char *s2);
+
+int		ft_strnequ(const char *s1, const char *s2, size_t n);
+
+char	*ft_strsub(const char *s, unsigned int start, size_t len);
+
+char	*ft_strjoin(const char *s1, const char *s2);
+
+char	*ft_strtrim(const char *s);
 
 #endif
