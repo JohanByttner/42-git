@@ -6,40 +6,31 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2015/11/27 13:38:23 by jbyttner         ###   ########.fr        #
+#    Updated: 2015/09/21 17:24:07 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=libft-test
-SRC=main.c
-ROOTDIR=./
-LIBDIR=$(ROOTDIR)./
-BINDIR=$(ROOTDIR)./
-INCDIR=$(ROOTDIR)includes/
-BUILDDIR=$(ROOTDIR)rendu/
-TESTDIR=$(ROOTDIR)tests/
-DIR=./
-
-MAKE-LIBFT=make -C src/
-Ilibft=-I src/includes/
-Llibft=-L src/ -lft
+NAME=
+SRC=
+ROOTDIR=
+LIBDIR=$(ROOTDIR)lib/
+BINDIR=$(ROOTDIR)bin/
+INCDIR=$(ROOTDIR)include/
+BUILDDIR=$(ROOTDIR)build/
+DIR=
 
 OBJ=$(SRC:.c=.o)
 CC=gcc
-CFLAGS=-Wall -Wextra -Werror -c
+CFLAGS=-Wall -Wextra -Werror -O3 -c
 AR=ar
 ARFLAGS=rc
 RM=rm -f
 
 all:	$(NAME)
 
-$(NAME): libft
-	$(CC) $(CFLAGS) $(Ilibft) $(SRC)
-	$(CC) $(OBJ) -o $(NAME) $(Llibft)
-
-libft:
-	$(MAKE-LIBFT) fclean
-	$(MAKE-LIBFT)
+$(NAME):
+	$(CC) $(CFLAGS) -I$(INCDIR) $(SRC)
+	$(AR) $(ARFLAGS) $(LIBDIR)$(NAME) $(OBJ)
 
 clean:
 	$(RM) $(OBJ)
@@ -47,4 +38,4 @@ clean:
 fclean:	clean
 	$(RM) $(LIBDIR)$(NAME)
 
-re: fclean all
+r: fclean all
