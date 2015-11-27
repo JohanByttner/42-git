@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 15:37:41 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/11/26 20:14:39 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/11/27 14:58:43 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,15 @@ char	*ft_strjoin(const char *s1, const char *s2);
 
 char	*ft_strtrim(const char *s);
 
+char	**ft_strsplit(const char *s, char c);
+
+char	*ft_itoa(int n);
+
+void	ft_putchar(char c);
+
+void	ft_putstr(const char *s);
+
+void	ft_putendl(const char *s);
+
+void	ft_putnbr(int n);
 #endif
