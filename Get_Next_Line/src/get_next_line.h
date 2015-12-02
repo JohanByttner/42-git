@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 19:04:26 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/11/29 19:06:09 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/02 14:57:58 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,19 @@
 # include "libft.h"
 # define BUFF_SIZE 1
 
-int	get_next_line(const int fd, char **line);
+/*
+** Heap memory is associated with a file descriptor.
+** content_size in the file descriptor gives the length of array
+** in t_mem. This structure is meant to be safe to cast.
+** The fd is accessed as ((t_mem *)list->content)->fd)
+*/
+
+typedef struct	s_mem
+{
+	int			fd;
+	char		*array;
+}				t_mem;
+
+int				get_next_line(const int fd, char **line);
 
 #endif
