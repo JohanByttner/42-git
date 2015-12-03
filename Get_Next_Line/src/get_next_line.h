@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 19:04:26 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/02 14:57:58 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/02 22:09:13 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_GET_NEXT_LINE_H
 # include <unistd.h>
 # include "libft.h"
-# define BUFF_SIZE 1
+# define BUFF_SIZE 30
 
 /*
 ** Heap memory is associated with a file descriptor.
