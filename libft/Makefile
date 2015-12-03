@@ -6,16 +6,16 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2015/11/27 13:38:23 by jbyttner         ###   ########.fr        #
+#    Updated: 2015/11/28 19:48:01 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=libft-test
-SRC=main.c
+SRC=main.c stringtests.c
 ROOTDIR=./
 LIBDIR=$(ROOTDIR)./
 BINDIR=$(ROOTDIR)./
-INCDIR=$(ROOTDIR)includes/
+INCDIR=$(ROOTDIR)./
 BUILDDIR=$(ROOTDIR)rendu/
 TESTDIR=$(ROOTDIR)tests/
 DIR=./
@@ -33,9 +33,10 @@ RM=rm -f
 
 all:	$(NAME)
 
-$(NAME): libft
-	$(CC) $(CFLAGS) $(Ilibft) $(SRC)
-	$(CC) $(OBJ) -o $(NAME) $(Llibft)
+$(NAME):
+	$(libft)
+	$(CC) $(CFLAGS) $(Ilibft) -I$(INCDIR) $(SRC)
+	$(CC) $(OBJ) -o $(NAME) $(Llibft) -lbsd
 
 libft:
 	$(MAKE-LIBFT) fclean
