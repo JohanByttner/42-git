@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 19:18:45 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/02 15:19:46 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/02 22:15:42 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "get_next_line.h"
 #include "libft.h"
 
-static size_t	join_to_heap(t_list *heap, char buff[BUFF_SIZE], size_t r)
+static size_t	join_to_heap(t_list *heap, char *buff, size_t r)
 {
 	char			*tmp;
 
@@ -43,7 +43,7 @@ static int		get_line_from_buffer(char **line, t_list *heap)
 	if (!(str = ft_memchr(((t_mem *)heap->content)->array, '\n',
 			heap->content_size)))
 		return (0);
-	len = (str - (char *)((t_mem *)heap->content)->array) * sizeof(char);
+	len = (str - (char *)((t_mem *)heap->content)->array);
 	if (!(*line = ft_memalloc(len + sizeof(char))))
 		return (-1);
 	ft_memcpy(*line, ((t_mem *)heap->content)->array, len);
@@ -74,6 +74,7 @@ static int		read_data_from_fd(int fd, t_list *heap, char **line)
 	{
 		*line = ft_memalloc(heap->content_size + 1);
 		ft_memcpy(*line, ((t_mem *)heap->content)->array, heap->content_size);
+		heap->content_size = 0;
 		return (1);
 	}
 	return (0);
@@ -82,12 +83,11 @@ static int		read_data_from_fd(int fd, t_list *heap, char **line)
 /*
 ** Once we get a call, we want to find the heap where the current
 ** file descriptor's calls are stored.
-** The first sizeof (int) bytes of the char pointer
-** in the heap is a file descriptor integer
-** The first three calls (null ptrs) signify heap errors.
-** These should force an error exit condition.
-** If the function does not find a file pointer, it returns
-** a new item after appending it to the list.
+** The list secretly stores t_mem pointers (see get_next_line.h)
+** which can be retrieved with ((t_mem *)(ptr->content)) .
+** Content length is set to give the length of the array in the t_mem object.
+** Warning: This is non-standard but legal behaviour.
+** Please follow this convention in this file (and this file only).
 */
 
 static t_list	*get_fd_ptr_from_heap(int fd, char **line, t_list **heap)
@@ -107,12 +107,10 @@ static t_list	*get_fd_ptr_from_heap(int fd, char **line, t_list **heap)
 		return (*heap);
 	}
 	ptr = *heap;
-	while (ptr && ptr->next)
-	{
-		if (((t_mem *)ptr->content)->fd == fd)
-			return (ptr);
+	while (ptr && ptr->next && (((t_mem *)ptr->content)->fd != fd))
 		ptr = ptr->next;
-	}
+	if (((t_mem *)ptr->content)->fd == fd)
+		return (ptr);
 	if (!(ptr->next = ft_lstnew(&mem, sizeof(t_mem))))
 		return (0);
 	ptr->next->content_size = 0;
