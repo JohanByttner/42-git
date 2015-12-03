@@ -6,13 +6,13 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 19:04:26 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/02 22:09:13 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/03 16:24:52 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_GET_NEXT_LINE_H
 # define FT_GET_NEXT_LINE_H
-# include <unistd.h>
+# include <stdlib.h>
 # include "libft.h"
 # define BUFF_SIZE 30
 
