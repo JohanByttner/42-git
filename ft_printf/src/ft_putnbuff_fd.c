@@ -6,11 +6,11 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 20:43:58 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/03 21:07:14 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/05 20:23:51 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_putbuff.h"
 
 /*
 ** Writes n characters into the given fd. The writing is buffered and
@@ -21,7 +21,7 @@
 ** Flushing an empty buffer is safe.
 */
 
-size_t	ft_putnbuff_fd(int fd, char *str, enum e_putbuff_cmd cmd, size_t n)
+size_t	ft_putnbuff_fd(int fd, char *str, t_putbuff_cmd cmd, size_t n)
 {
 	char	buff[FT_PUTNBUFF_SIZE + 1];
 	size_t	i;
@@ -37,14 +37,14 @@ size_t	ft_putnbuff_fd(int fd, char *str, enum e_putbuff_cmd cmd, size_t n)
 		if (i == FT_PUTNBUFF_SIZE)
 		{
 			buff[FT_PUTNBUFF_SIZE] = '\0';
-			num_printed += ft_putbuff_fd(fd, s, cmd);
+			num_printed += ft_putbuff_fd(fd, buff, cmd);
 			i = 0;
 		}
 	}
 	if (i != 0)
 	{
 		buff[i] = '\0';
-		num_printed += ft_putbuff_fd(fd, s, cmd);
+		num_printed += ft_putbuff_fd(fd, buff, cmd);
 	}
 	return (num_printed);
 }

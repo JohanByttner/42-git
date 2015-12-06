@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putbuff.c                                       :+:      :+:    :+:   */
+/*   ft_vdprintf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/03 20:03:56 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/05 20:23:23 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/12/03 16:46:47 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/12/03 20:45:38 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_putbuff.h"
+#include <stdarg.h>
+#include "ft_printf.h"
 
-size_t	ft_putbuff(char *str, t_putbuff_cmd cmd)
+int		ft_vdprintf(int fd, const char *format, va_list ap)
 {
-	return (ft_putbuff_fd(1, str, cmd));
+	char	buff[2];
+
+	while (*format)
+	{
+
+	}
 }

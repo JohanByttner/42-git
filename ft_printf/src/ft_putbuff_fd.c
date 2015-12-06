@@ -6,12 +6,12 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/03 19:36:44 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/04 23:10:16 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/05 20:24:02 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "ft_printf.h"
+#include "ft_putbuff.h"
 
 /*
 ** Saves the string str to a buffer and writes it to fd after
@@ -20,7 +20,7 @@
 ** To properly use this function in multiple threads, define a thread-lock.
 */
 
-size_t	ft_putbuff_fd(int fd, char *str, enum e_putbuff_cmd cmd)
+size_t	ft_putbuff_fd(int fd, char *str, t_putbuff_cmd cmd)
 {
 	static char	buff[FT_PUTBUFF_SIZE];
 	static int	buff_length = 0;
