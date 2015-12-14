@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2015/12/10 18:06:39 by jbyttner         ###   ########.fr        #
+#    Updated: 2015/12/10 23:22:01 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME=libmlxutil.a
 SRC=	mlx_get_handler.c		\
 		mlx_get_window.c		\
 		mlx_set_window.c		\
-		mlx_set_image.c
+		mlx_set_image.c			\
+		mlx_get_point.c			\
+		mlx_cmp_points.c
 ROOTDIR=./
 LIBDIR=$(ROOTDIR)
 BINDIR=$(ROOTDIR)
