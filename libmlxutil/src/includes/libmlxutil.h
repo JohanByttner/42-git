@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 20:31:21 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/14 23:54:02 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/17 22:18:16 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ typedef struct		s_point
 }					t_point;
 
 typedef double[16]	t_matrix_4x4;
+
+typedef struct		s_3dbasis
+{
+	t_3dpoint		n;
+	t_3dpoint		l;
+	t_3dpoint		m;
+}					t_3dbasis;
 
 /*
 ** Points can be freed directly with free

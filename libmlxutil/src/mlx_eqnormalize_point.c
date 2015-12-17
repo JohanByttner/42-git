@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_points_cross_product.c                         :+:      :+:    :+:   */
+/*   mlx_eqnormalize_point.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/14 13:40:53 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/14 23:54:10 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/12/17 11:01:54 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/12/17 11:07:53 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "libmlxutil.h"
 
-t_3dpoint	*mlx_point_cross_product(t_3dpoint *a, t_3dpoint *b, t_3dpoint *n)
-{
-	t_3dpoint	*out;
+/*
+** Note: this function will (probably) break with really tiny vectors.
+** Null vector is handled.
+*/
 
-	if (!(out = ft_memalloc(sizeof(t_3dpoint))))
-		return (0);
-	out->i = n->i * (a->j * b->k - a->k * b->j);
-	out->j = n->j * (a->i * b->k - a->k * b->j);
-	out->k = n->k * (a->i * b->j - a->j * b->i);
-	return (out);
+t_3dpoint	mlx_eqnormalize_point(t_3dpoint *point)
+{
+	double	absvalue;
+
+	if ((absvalue = mlx_abs_point(point)))
+	{
+		point->i /= absvalue;
+		point->j /= absvalue;
+		point->k /= absvalue;
+	}
+	return (point);
 }
