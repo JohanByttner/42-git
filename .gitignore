@@ -7,6 +7,7 @@ Credited to @Octocat
 *.dll
 *.exe
 *.o
+*.a
 *.so
 *.pyc
 
