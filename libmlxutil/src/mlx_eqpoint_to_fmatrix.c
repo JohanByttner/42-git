@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_get_handler.c                                  :+:      :+:    :+:   */
+/*   mlx_eqpoint_to_fmatrix.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/09 19:26:30 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/23 19:25:18 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/12/22 01:29:15 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/12/23 23:30:29 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "libmlxutil.h"
 
-t_mlx_handler	*mlx_get_handler(void)
+t_fmatrix	*mlx_eqpoint_to_fmatrix(t_fmatrix *m, t_3dpoint *p)
 {
-	static t_mlx_handler	handler = { 0 };
-
-	if (!(handler.init))
-	{
-		if (!(handler.init = mlx_init()))
-			return (0);
-		handler.images = 0;
-		handler.image_count = 0;
-		ft_bzero(handler.windows,
-			sizeof(t_mlx_window *) * MLX_MAX_WINDOW_COUNT);
-	}
-	return (&handler);
+	m->value[0] = p->i;
+	m->value[1] = p->j;
+	m->value[2] = p->k;
+	m->value[3] = 1;
+	m->width = 1;
+	m->height = 3;
+	return (m);
 }

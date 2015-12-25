@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_get_handler.c                                  :+:      :+:    :+:   */
+/*   mlx_distance_points2d.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/09 19:26:30 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/23 19:25:18 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/12/24 10:47:06 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/12/24 23:29:49 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
+#include <math.h>
 #include "libmlxutil.h"
 
-t_mlx_handler	*mlx_get_handler(void)
+double		mlx_distance_points2d(t_point *p1, t_point *p2)
 {
-	static t_mlx_handler	handler = { 0 };
+	double	distance;
 
-	if (!(handler.init))
-	{
-		if (!(handler.init = mlx_init()))
-			return (0);
-		handler.images = 0;
-		handler.image_count = 0;
-		ft_bzero(handler.windows,
-			sizeof(t_mlx_window *) * MLX_MAX_WINDOW_COUNT);
-	}
-	return (&handler);
+	distance = (p2->i - p1->i) * (p2->i - p1->i);
+	distance += (p2->j - p1->j) * (p2->j - p1->j);
+	return (sqrt(distance));
 }

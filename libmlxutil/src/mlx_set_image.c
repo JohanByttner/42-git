@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 16:47:29 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/10 18:13:30 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/23 21:03:21 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,26 @@
 #include <mlx.h>
 #include "libft.h"
 #include "libmlxutil.h"
+
+static int		mlx_static_load_image(t_mlx_image *image, int sx, int sy)
+{
+	t_mlx_handler	*handler;
+
+	if (!(handler = mlx_get_handler()))
+		return (0);
+	if ((image) == 0)
+		if (!(image = ft_memalloc(sizeof(t_mlx_image))))
+			return (0);
+	if (image->image)
+		mlx_destroy_image(handler->init, image->image);
+	image->size_x = sx;
+	image->size_y = sy;
+	if (!(image->image = mlx_new_image(handler->init, sx, sy)))
+		return (0);
+	image->data = mlx_get_data_addr(image->image, &(image->bits_per_pixel),
+			&(image->size_line), &(image->endian));
+	return (1);
+}
 
 t_mlx_image		*mlx_set_image(int id, int size_x, int size_y)
 {
@@ -33,12 +53,8 @@ t_mlx_image		*mlx_set_image(int id, int size_x, int size_y)
 			return (0);
 	}
 	image = &(handler->images[id]);
-	if (image->image)
-		mlx_destroy_image(handler->init, image->image);
-	image->size_x = size_x;
-	image->size_y = size_y;
-	if (!(image->image = mlx_new_image(handler->init, size_x, size_y)))
-		return (0);
-	else
+	if (mlx_static_load_image(image, size_x, size_y))
 		return (image);
+	else
+		return (0);
 }

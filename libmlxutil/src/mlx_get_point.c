@@ -6,20 +6,20 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 23:17:12 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/14 23:53:48 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/23 17:13:14 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libmlxutil.h"
 
-t_point		*mlx_get_point(int x, int y, int z)
+t_3dpoint		*mlx_get_point(int i, int j, int k)
 {
-	t_point		*point;
+	t_3dpoint		*point;
 
 	point = malloc(sizeof(t_point));
-	point->x = x;
-	point->y = y;
-	point->z = z;
+	point->i = i;
+	point->j = j;
+	point->k = k;
 	return (point);
 }

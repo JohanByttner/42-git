@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_get_handler.c                                  :+:      :+:    :+:   */
+/*   mlx_put_line_to_image.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/09 19:26:30 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/23 19:25:18 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/12/24 00:29:35 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/12/25 16:06:27 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "libmlxutil.h"
 
-t_mlx_handler	*mlx_get_handler(void)
-{
-	static t_mlx_handler	handler = { 0 };
+/*
+** The current implementation will refuse to render a line
+** if either of the two points are illegal
+*/
 
-	if (!(handler.init))
-	{
-		if (!(handler.init = mlx_init()))
-			return (0);
-		handler.images = 0;
-		handler.image_count = 0;
-		ft_bzero(handler.windows,
-			sizeof(t_mlx_window *) * MLX_MAX_WINDOW_COUNT);
-	}
-	return (&handler);
+void	mlx_put_line_to_image(t_3dline *line, t_mlx_camera *c,
+			t_mlx_image *im, t_colour *colour)
+{
+	t_line	l2;
+	t_point	p1;
+	t_point	p2;
+
+	if ((l2.start = mlx_eqget_point2d(&p1, line->start, c))
+			&& (l2.end = mlx_eqget_point2d(&p2, line->end, c)))
+		mlx_put_line2d_to_image(&l2, im, colour);
 }

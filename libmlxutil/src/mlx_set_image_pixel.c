@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_get_handler.c                                  :+:      :+:    :+:   */
+/*   mlx_set_image_pixel.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/09 19:26:30 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/23 19:25:18 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/12/23 18:35:53 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/12/25 17:55:54 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "libmlxutil.h"
+#include <mlx.h>
+#include <limits.h>
 
-t_mlx_handler	*mlx_get_handler(void)
+void	mlx_set_image_pixel(t_mlx_image *im, t_colour *colour, size_t pixel)
 {
-	static t_mlx_handler	handler = { 0 };
+	int				cval;
+	int				j;
+	char			*ptr;
 
-	if (!(handler.init))
+	cval = mlx_get_colour_int(colour, im);
+	j = im->bits_per_pixel;
+	ptr = im->data + pixel;
+	while (j > 0)
 	{
-		if (!(handler.init = mlx_init()))
-			return (0);
-		handler.images = 0;
-		handler.image_count = 0;
-		ft_bzero(handler.windows,
-			sizeof(t_mlx_window *) * MLX_MAX_WINDOW_COUNT);
+		*ptr++ = (char)cval;
+		cval = cval >> CHAR_BIT;
+		j -= CHAR_BIT;
 	}
-	return (&handler);
 }

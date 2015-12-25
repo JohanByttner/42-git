@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_get_handler.c                                  :+:      :+:    :+:   */
+/*   mlx_copy_point2d.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/09 19:26:30 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/23 19:25:18 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/12/24 17:55:05 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/12/24 18:03:15 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "libmlxutil.h"
 
-t_mlx_handler	*mlx_get_handler(void)
+t_point		*mlx_copy_point2d(t_point *copy, t_point *point)
 {
-	static t_mlx_handler	handler = { 0 };
-
-	if (!(handler.init))
-	{
-		if (!(handler.init = mlx_init()))
-			return (0);
-		handler.images = 0;
-		handler.image_count = 0;
-		ft_bzero(handler.windows,
-			sizeof(t_mlx_window *) * MLX_MAX_WINDOW_COUNT);
-	}
-	return (&handler);
+	copy->i = point->i;
+	copy->j = point->j;
+	return (copy);
 }
