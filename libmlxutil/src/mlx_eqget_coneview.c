@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_eqfmatrix_to_point2d.c                         :+:      :+:    :+:   */
+/*   mlx_eqget_coneview.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/22 01:31:23 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/25 23:16:16 by jbyttner         ###   ########.fr       */
+/*   Created: 2015/12/25 23:18:06 by jbyttner          #+#    #+#             */
+/*   Updated: 2015/12/25 23:23:48 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
 
-t_point		*mlx_eqfmatrix_to_point2d(t_point *p, t_fmatrix *m)
+t_fmatrix	*mlx_eqget_coneview(t_fmatrix *point, t_mlx_camera *camera)
 {
-	p->i = m->value[0];
-	p->j = m->value[1];
-	return (p);
+	point->value[0] /= point->value[2];
+	point->value[1] /= point->value[2];
+	if (!(camera->overwriting_render))
+		if (!(mlx_camera_record_pixel_depth(point, camera)))
+			return (0);
+	return (point);
 }

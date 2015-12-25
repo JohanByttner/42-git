@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 20:31:21 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/25 17:49:53 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/25 23:34:57 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,11 @@ t_mlx_camera		*mlx_new_camera(int focus, int size_x, int size_y);
 int					mlx_camera_record_pixel_depth(t_fmatrix *pos,
 						t_mlx_camera *camera);
 
+t_fmatrix			*mlx_eqget_cameraview(t_fmatrix *point,
+						t_mlx_camera *camera);
+
+t_fmatrix			*mlx_eqget_coneview(t_fmatrix *point, t_mlx_camera *camera);
+
 t_fmatrix			*mlx_new_fmatrix(size_t width, size_t height);
 
 t_fmatrix			*mlx_eqmul_fmatrix(t_fmatrix *res, t_fmatrix *a,
@@ -157,9 +162,14 @@ t_fmatrix			*mlx_eqmul_fmatrix(t_fmatrix *res, t_fmatrix *a,
 
 t_point				*mlx_eqfmatrix_to_point2d(t_point *p, t_fmatrix *m);
 
+t_3dpoint			*mlx_eqfmatrix_to_point(t_3dpoint *p, t_fmatrix *m);
+
 t_fmatrix			*mlx_eqpoint_to_fmatrix(t_fmatrix *m, t_3dpoint *p);
 
 t_point				*mlx_eqget_point2d(t_point *res, t_3dpoint *input,
+						t_mlx_camera *camera);
+
+t_3dpoint			*mlx_eqget_point(t_3dpoint *res, t_3dpoint *input,
 						t_mlx_camera *camera);
 
 void				mlx_put_point_to_image(t_3dpoint *p, t_mlx_camera *c,
