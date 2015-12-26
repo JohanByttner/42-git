@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/21 22:31:08 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/25 23:10:27 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/26 00:40:04 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,16 @@ t_point		*mlx_eqget_point2d(t_point *res, t_3dpoint *input,
 	//mlx_eqmul_fmatrix(&orig, camera->int_matrix, &m);
 	//m.value[0] /= m.value[2];
 	//m.value[1] /= m.value[2];
-	mlx_eqget_cameraview(&orig, camera);
-	orig.value[0] /= orig.value[2];
-	orig.value[1] /= orig.value[2];
-	if (!(camera->overwriting_render))
-		if (!(mlx_camera_record_pixel_depth(&orig, camera)))
-			return (0);
-	mlx_eqfmatrix_to_point2d(res, &orig);
-	return (res);
+	if (mlx_eqget_cameraview(&orig, camera))
+		if (mlx_eqget_coneview(&orig, camera))
+		{
+	//orig.value[0] /= orig.value[2];
+	//orig.value[1] /= orig.value[2];
+	//if (!(camera->overwriting_render))
+	//	if (!(mlx_camera_record_pixel_depth(&orig, camera)))
+	//		return (0);
+			mlx_eqfmatrix_to_point2d(res, &orig);
+			return (res);
+		}
+	return (0);
 }

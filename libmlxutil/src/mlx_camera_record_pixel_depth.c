@@ -6,12 +6,11 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/25 15:46:01 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/25 20:47:18 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/26 11:46:56 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
-#include "libft.h"
 
 /*
 ** Records the depth of the pixel's current rendering.
@@ -32,7 +31,6 @@ int		mlx_camera_record_pixel_depth(t_fmatrix *pt, t_mlx_camera *camera)
 			0.5 : -0.5));
 	y = (camera->size_y / 2) + (int)(pt->value[1] + (pt->value[1] >= 0 ?
 			0.5 : -0.5));
-
 	if (0 <= x && x < camera->size_x
 			&& 0 <= y && y < camera->size_y)
 	{
