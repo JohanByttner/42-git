@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/23 18:29:33 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/25 17:52:05 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/26 17:15:25 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ int		mlx_get_colour_int(t_colour *colour, t_mlx_image *im)
 
 	val = 0;
 	ptr = (unsigned char *)(&val);
-	*(ptr + (sizeof(int) - 1) - (sizeof(int) - 1) * im->endian) = colour->blue;
-	*(ptr + (sizeof(int) - 2) - (sizeof(int) - 3) * im->endian) = colour->green;
-	*(ptr + ((int)sizeof(int) - 3)
-		- ((int)sizeof(int) - 5) * im->endian) = colour->red;
+	ptr[(sizeof(int) - 1) * im->endian] = colour->blue;
+	ptr[1 + (sizeof(int) - 3) * im->endian] = colour->green;
+	ptr[2 + ((int)sizeof(int) - 5) * im->endian] = colour->red;
 	return (mlx_get_color_value(mlx_get_handler()->init, val));
 }
