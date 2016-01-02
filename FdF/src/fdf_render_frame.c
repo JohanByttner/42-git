@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_get_window.c                                   :+:      :+:    :+:   */
+/*   fdf_render_frame.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/09 19:26:48 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/09 20:31:56 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/02 16:56:45 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/02 18:32:06 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <mlx.h>
 #include "libmlxutil.h"
+#include "fdf.h"
 
-t_mlx_window	*mlx_get_window(int wd)
+/*
+** This simply calls on frame one
+*/
+
+void	fdf_render_frame(void)
 {
-	t_mlx_handler	*handler;
+	t_mlx_image		*img;
+	t_mlx_window	*window;
 
-	if (wd < 0 || MLX_MAX_WINDOW_COUNT <= wd)
-		return (0);
-	else if (!(handler = mlx_get_handler()))
-		return (0);
-	return (&(handler->windows[wd]));
+	if (!(window = mlx_get_window(0)) || !(img = mlx_get_image(0)))
+		return ;
+	mlx_clear_image(img);
+	mlx_render_image(img);
+	mlx_put_image_to_window(mlx_get_handler()->init, window->window,
+			img->image, 0, 0);
 }

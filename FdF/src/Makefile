@@ -6,36 +6,53 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2015/12/09 19:47:30 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/01/02 18:03:41 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=libmlxutil.a
-SRC=	mlx_get_handler.c		\
-		mlx_get_window.c		\
-		mlx_set_window.c
+NAME=fdf
+SRC=	main.c							\
+		fdf_exit.c						\
+		fdf_read_file.c					\
+		get_next_line.c					\
+		fdf_load_frame.c				\
+		fdf_render_frame.c				\
+		fdf_key_hook.c	
+
+
 ROOTDIR=./
 LIBDIR=$(ROOTDIR)
 BINDIR=$(ROOTDIR)
-INCDIR=$(ROOTDIR)includes/ -I libft/includes
+INCDIR=$(ROOTDIR)get_next_line/
+LDDIR= libft/ -L libmlxutil/ -L /usr/local/lib
 BUILDDIR=$(ROOTDIR)
-FTDIR=libft
 DIR=./
 
 OBJ=$(SRC:.c=.o)
 CC=gcc
-CFLAGS=-Wall -Wextra -Werror -c
+CFLAGS=-Wall -Wextra -g# -Werror
 AR=ar
 ARFLAGS=rc
 RM=rm -f
 
 all:	$(NAME)
 
-$(NAME):
-	$(CC) $(CFLAGS) -L $(FTDIR) -I $(FTDIR)/includes \
-	-I$(INCDIR) $(SRC) -lm -I/usr/local/include \
-							-L/usr/local/lib -lmlx -lXext -lX11
-	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
+libft:
+	make -C libft/ fclean
+	make -C libft/
+
+libmlxutil:
+	make -C libmlxutil/ fclean
+	make -C libmlxutil/
+
+$(NAME):	libft libmlxutil
+	cp get_next_line/get_next_line.c .
+	$(CC) $(CFLAGS) -c -I$(INCDIR) $(SRC) -I/usr/local/include	\
+		-I libmlxutil/includes -I libft/includes	\
+		-I /usr/include/X11
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L $(LDDIR)	\
+		-lmlxutil -lft -lmlx -lXext -lX11 -lm
+
 clean:
 	$(RM) $(OBJ)
 
