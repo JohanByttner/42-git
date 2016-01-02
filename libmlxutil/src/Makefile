@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2015/12/26 17:16:00 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/01/02 18:31:18 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,24 @@ SRC=	mlx_get_handler.c				\
 		mlx_get_window.c				\
 		mlx_set_window.c				\
 		mlx_set_image.c					\
+		mlx_get_image.c					\
+		mlx_render_image.c				\
+		mlx_clear_image.c				\
 		mlx_get_point.c					\
 		mlx_cmp_points.c				\
 		mlx_copy_point2d.c				\
 		mlx_distance_points2d.c			\
+		mlx_new_line.c					\
+		mlx_render_lline.c				\
+		mlx_renderl_lline.c				\
+		mlx_new_world.c					\
+		mlx_loadl_lline.c				\
 		mlx_new_camera.c				\
+		mlx_rotate_camera.c				\
+		mlx_rotatei_camera.c			\
+		mlx_rotatej_camera.c			\
+		mlx_rotatek_camera.c			\
+		mlx_translate_camera.c			\
 		mlx_camera_record_pixel_depth.c	\
 		mlx_eqget_cameraview.c			\
 		mlx_eqget_coneview.c			\
@@ -33,9 +46,12 @@ SRC=	mlx_get_handler.c				\
 		mlx_put_point_to_image.c		\
 		mlx_put_point2d_to_image.c		\
 		mlx_put_line_to_image.c			\
+		mlx_put_linec_to_image.c		\
 		mlx_put_line2d_to_image.c		\
 		mlx_set_image_pixel.c			\
+		mlx_new_colour.c				\
 		mlx_get_colour_int.c
+
 ROOTDIR=./
 LIBDIR=$(ROOTDIR)
 BINDIR=$(ROOTDIR)
@@ -47,7 +63,7 @@ DIR=./
 OBJ=$(SRC:.c=.o)
 ASM=$(SRC:.c=.s)
 CC=gcc
-CFLAGS=-c -pg -O3 -fstrict-aliasing
+CFLAGS=-c -g -pg -O3 -fstrict-aliasing
 CWFLAGS=-Wall -Wextra -Wstrict-aliasing=2 #-Werror
 AR=ar
 ARFLAGS=rc
