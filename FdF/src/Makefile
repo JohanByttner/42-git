@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/01/02 18:03:41 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/01/03 20:05:56 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ SRC=	main.c							\
 		get_next_line.c					\
 		fdf_load_frame.c				\
 		fdf_render_frame.c				\
-		fdf_key_hook.c	
+		fdf_key_hook.c					\
+		fdf_add_vertical_lines.c		\
+		print_matrix.c
 
 
 ROOTDIR=./

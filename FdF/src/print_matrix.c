@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_rotatej_camera.c                               :+:      :+:    :+:   */
+/*   print_matrix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/02 03:05:00 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/03 19:36:54 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/03 18:36:12 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/03 18:41:39 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
+#include <stdio.h>
 #include "libmlxutil.h"
-
-t_mlx_camera	*mlx_rotatej_camera(t_mlx_camera *camera, double angle)
+void	print_matrix(t_fmatrix *m)
 {
-	t_fmatrix	tmp;
-	double		arr[9];
-
-	tmp.width = 3;
-	tmp.height = 3;
-	tmp.value = arr;
-	ft_bzero(arr, sizeof(arr));
-	arr[0] = cos(angle);
-	arr[2] = sin(angle);
-	arr[4] = 1;
-	arr[6] = -sin(angle);
-	arr[8] = cos(angle);
-	return (mlx_rotate_camera(camera, &tmp));
+	printf("\n");
+	for (unsigned int i = 0; i < m->height; i++)
+	{
+		printf("[");
+		for (unsigned int j = 0; j < m->width; j++)
+		{
+			printf("%10.3lf", m->value[i * m->width + j]);
+		}
+		printf("]\n");
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 17:44:18 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/02 18:23:55 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/03 20:05:31 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	fdf_key_hook(int keycode, void *param)
 	else if (keycode == XK_q || keycode == XK_e)
 	{
 		angle = (keycode == XK_q ? -FDF_ANGLE_STEP : FDF_ANGLE_STEP);
-		mlx_rotatek_camera(camera, angle);
+		mlx_rotatei_camera(camera, angle);
 	}
 	else if (keycode == XK_Escape)
 		fdf_exit(0 && param);

@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 17:24:36 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/02 18:20:16 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/03 20:07:00 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		main(int ac, char **av)
 	if (!(list = fdf_read_file(fd)))
 		return (0);
 	ft_putstr("Opened file\n");
+	fdf_add_vertical_lines(list);
 	fdf_load_frame(list);
 	mlx_key_hook(mlx_get_window(0)->window, fdf_key_hook, 0);
 	mlx_loop(mlx_get_handler()->init);

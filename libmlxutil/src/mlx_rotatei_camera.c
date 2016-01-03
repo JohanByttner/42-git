@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 02:23:33 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/02 03:11:53 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/03 19:36:25 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ t_mlx_camera	*mlx_rotatei_camera(t_mlx_camera *camera, double angle)
 	tmp.value = arr;
 	ft_bzero(arr, sizeof(arr));
 	arr[0] = 1;
-	arr[4] = cos(-angle);
-	arr[5] = -sin(-angle);
-	arr[7] = sin(-angle);
-	arr[8] = cos(-angle);
+	arr[4] = cos(angle);
+	arr[5] = -sin(angle);
+	arr[7] = sin(angle);
+	arr[8] = cos(angle);
 	return (mlx_rotate_camera(camera, &tmp));
 }

@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_rotatej_camera.c                               :+:      :+:    :+:   */
+/*   ft_lstmerge.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/02 03:05:00 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/03 19:36:54 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/03 20:03:02 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/03 20:20:53 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-#include "libmlxutil.h"
+#include "libft.h"
 
-t_mlx_camera	*mlx_rotatej_camera(t_mlx_camera *camera, double angle)
+t_list	*ft_lstmerge(t_list *l1, t_list *l2)
 {
-	t_fmatrix	tmp;
-	double		arr[9];
+	t_list	*tmp;
 
-	tmp.width = 3;
-	tmp.height = 3;
-	tmp.value = arr;
-	ft_bzero(arr, sizeof(arr));
-	arr[0] = cos(angle);
-	arr[2] = sin(angle);
-	arr[4] = 1;
-	arr[6] = -sin(angle);
-	arr[8] = cos(angle);
-	return (mlx_rotate_camera(camera, &tmp));
+	if ((tmp = ft_lstlast(l1)))
+		tmp->next = l2;
+	return (l1);
 }

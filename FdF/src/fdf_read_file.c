@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/26 17:19:52 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/02 17:12:44 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/02 21:28:33 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static t_list	*fdf_read_row_line(char *s1, char *s2, int row, int index)
 	t_3dline	*line;
 	t_colour	*colour;
 
-	p1.k = ft_atoi(s1);
+	p1.k = -ft_atoi(s1);
 	p1.i = (index == -1 ? 0 : index * FDF_SCALING);
 	p1.j = row * FDF_SCALING;
-	p2.k = ft_atoi(s2);
+	p2.k = -ft_atoi(s2);
 	p2.i = (index + 1) * FDF_SCALING;
 	p2.j = row * FDF_SCALING;
 	if (!(line = mlx_new_line(&p1, &p2)))
