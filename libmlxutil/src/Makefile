@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/01/02 18:31:18 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/01/08 22:50:07 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,21 @@ SRC=	mlx_get_handler.c				\
 		mlx_clear_image.c				\
 		mlx_get_point.c					\
 		mlx_cmp_points.c				\
+		mlx_copy_point.c				\
+		mlx_eqnormalize_point.c			\
+		mlx_abs_point.c					\
+		mlx_eqsub_point.c				\
+		mlx_distance_points.c			\
 		mlx_copy_point2d.c				\
 		mlx_distance_points2d.c			\
+		mlx_abs_point2d.c				\
+		mlx_eqadd_point2d.c				\
 		mlx_new_line.c					\
 		mlx_render_lline.c				\
 		mlx_renderl_lline.c				\
 		mlx_new_world.c					\
 		mlx_loadl_lline.c				\
+		mlx_eqget_line_cone_intersect.c	\
 		mlx_new_camera.c				\
 		mlx_rotate_camera.c				\
 		mlx_rotatei_camera.c			\
@@ -38,6 +46,7 @@ SRC=	mlx_get_handler.c				\
 		mlx_eqget_coneview.c			\
 		mlx_new_fmatrix.c				\
 		mlx_eqmul_fmatrix.c				\
+		mlx_eqtranspose_fmatrix.c		\
 		mlx_eqfmatrix_to_point2d.c		\
 		mlx_eqfmatrix_to_point.c		\
 		mlx_eqpoint_to_fmatrix.c		\
@@ -50,7 +59,8 @@ SRC=	mlx_get_handler.c				\
 		mlx_put_line2d_to_image.c		\
 		mlx_set_image_pixel.c			\
 		mlx_new_colour.c				\
-		mlx_get_colour_int.c
+		mlx_get_colour_int.c			\
+		mlx_eqmul_complex.c
 
 ROOTDIR=./
 LIBDIR=$(ROOTDIR)
@@ -63,7 +73,7 @@ DIR=./
 OBJ=$(SRC:.c=.o)
 ASM=$(SRC:.c=.s)
 CC=gcc
-CFLAGS=-c -g -pg -O3 -fstrict-aliasing
+CFLAGS=-c -O3 -fstrict-aliasing -g -pg
 CWFLAGS=-Wall -Wextra -Wstrict-aliasing=2 #-Werror
 AR=ar
 ARFLAGS=rc

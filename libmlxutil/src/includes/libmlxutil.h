@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 20:31:21 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/02 19:53:36 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/08 22:50:38 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # define MLX_MAX_WINDOW_COUNT 2
 # define MLX_IMAGES_BUFF_SIZE 2
 # define MLX_DEFAULT_CAMERA_MODE 2
+# ifndef MLX_BASE_FOCUS
+#  define MLX_BASE_FOCUS 1000.0
+# endif
 
 typedef struct		s_fmatrix
 {
@@ -103,6 +106,8 @@ typedef struct		s_point
 	double			j;
 }					t_point;
 
+typedef t_point		t_complex;
+
 typedef struct		s_3dline
 {
 	t_3dpoint		*start;
@@ -132,7 +137,21 @@ t_3dpoint			*mlx_get_point(int i, int j, int k);
 
 int					mlx_cmp_points(t_3dpoint *p1, t_3dpoint *p2);
 
+t_3dpoint			*mlx_copy_point(t_3dpoint *copy, t_3dpoint *input);
+
+t_3dpoint			*mlx_eqnormalize_point(t_3dpoint *point);
+
+double				mlx_abs_point(t_3dpoint *point);
+
+t_3dpoint			*mlx_eqsub_point(t_3dpoint *res, t_3dpoint *sub);
+
+double				mlx_distance_points(t_3dpoint *p1, t_3dpoint *p2);
+
 t_point				*mlx_copy_point2d(t_point *copy, t_point *point);
+
+double				mlx_abs_point2d(t_point *p);
+
+t_point				*mlx_eqadd_point2d(t_point *p1, t_point *p2);
 
 t_3dline			*mlx_new_line(t_3dpoint *p1, t_3dpoint *p2);
 
@@ -141,6 +160,8 @@ void				mlx_render_lline(t_list *lline, t_mlx_camera *camera,
 
 void				mlx_renderl_lline(t_list *llist, t_mlx_camera *camera,
 						t_mlx_image *img);
+
+t_3dline			*mlx_eqget_line_cone_intersect(t_3dline *line);
 
 double				mlx_distance_points2d(t_point *p1, t_point *p2);
 
@@ -190,6 +211,8 @@ t_fmatrix			*mlx_new_fmatrix(size_t width, size_t height);
 t_fmatrix			*mlx_eqmul_fmatrix(t_fmatrix *res, t_fmatrix *a,
 						t_fmatrix *b);
 
+t_fmatrix			*mlx_eqtranspose_fmatrix(t_fmatrix *res, t_fmatrix *input);
+
 t_point				*mlx_eqfmatrix_to_point2d(t_point *p, t_fmatrix *m);
 
 t_3dpoint			*mlx_eqfmatrix_to_point(t_3dpoint *p, t_fmatrix *m);
@@ -224,5 +247,8 @@ t_colour			*mlx_new_colour(unsigned char red, unsigned char green,
 						unsigned char blue, char endian);
 
 int					mlx_get_colour_int(t_colour *colour, t_mlx_image *im);
+
+t_complex			*mlx_eqmul_complex(t_complex *res, t_complex *c1,
+						t_complex *c2);
 
 #endif

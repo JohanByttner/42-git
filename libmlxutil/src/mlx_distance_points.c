@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_translate_camera.c                             :+:      :+:    :+:   */
+/*   mlx_distance_points.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/02 02:18:38 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/03 21:40:00 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/07 15:52:34 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/07 15:56:53 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "libmlxutil.h"
 
-/*
-** We are taking the negative of the coordinates since
-** we are looking at a mirror image of the picture
-*/
-
-t_mlx_camera	*mlx_translate_camera(t_mlx_camera *camera, t_3dpoint *t)
+double	mlx_distance_points(t_3dpoint *p1, t_3dpoint *p2)
 {
-	camera->ext_matrix->value[3] -= t->i;
-	camera->ext_matrix->value[7] -= t->j;
-	camera->ext_matrix->value[11] -= t->k;
-	return (camera);
+	double	distance;
+	double	tmp;
+
+	tmp = (p2->i - p1->i);
+	distance = tmp * tmp;
+	tmp = (p2->j - p1->j);
+	distance += tmp * tmp;
+	tmp = (p2->k - p1->k);
+	distance += tmp * tmp;
+	return (sqrt(distance));
 }

@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/17 11:01:54 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/17 11:07:53 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/06 14:52:24 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** Null vector is handled.
 */
 
-t_3dpoint	mlx_eqnormalize_point(t_3dpoint *point)
+t_3dpoint	*mlx_eqnormalize_point(t_3dpoint *point)
 {
 	double	absvalue;
 

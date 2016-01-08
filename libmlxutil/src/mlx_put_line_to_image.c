@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/24 00:29:35 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/26 11:49:01 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/06 16:37:43 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,35 @@ static void		mlx_line_put_point_to_image(t_3dpoint *p, t_mlx_image *im,
 	}
 }
 
+inline double	mlx_line_get_distance(t_3dline *line)
+{
+	t_point	p1;
+	t_point	p2;
+
+	#define MLX_RENDER_DEPTH 1000.0
+	if (line->start->k < - 1 || 1 < line->start->k)
+	{
+		p1.i = line->start->i * MLX_RENDER_DEPTH / line->start->k;
+		p1.j = line->start->j * MLX_RENDER_DEPTH / line->start->k;
+	}
+	else
+	{
+		p1.i = line->start->i * MLX_RENDER_DEPTH;
+		p1.j = line->start->j * MLX_RENDER_DEPTH;
+	}
+	if (line->end->k < -1 || 1 < line->end->k)
+	{
+		p2.i = line->end->i * MLX_RENDER_DEPTH / line->end->k;
+		p2.j = line->end->j * MLX_RENDER_DEPTH / line->end->k;
+	}
+	else
+	{
+		p2.i = line->end->i * MLX_RENDER_DEPTH;
+		p2.j = line->end->j * MLX_RENDER_DEPTH;
+	}
+	return (mlx_distance_points2d(&p1, &p2));
+}
+
 static void		mlx_line_put_line_to_image(t_3dline *line, t_mlx_image *im,
 			t_mlx_camera *camera, t_colour *colour)
 {
@@ -58,17 +87,16 @@ static void		mlx_line_put_line_to_image(t_3dline *line, t_mlx_image *im,
 	double		cosv;
 	double		zv;
 
-	distance = mlx_distance_points2d((t_point *)line->start,
-			(t_point *)line->end);
+	distance = mlx_line_get_distance(line);
 	cosv = (line->end->i - line->start->i) / distance;
 	sinv = (line->end->j - line->start->j) / distance;
 	zv = (line->end->k - line->start->k) / distance;
 	while (distance-- >= 0)
 	{
+		mlx_line_put_point_to_image(line->start, im, colour, camera);
 		line->start->j += sinv;
 		line->start->i += cosv;
 		line->start->k += zv;
-		mlx_line_put_point_to_image(line->start, im, colour, camera);
 	}
 }
 
@@ -81,5 +109,8 @@ void	mlx_put_line_to_image(t_3dline *line, t_mlx_camera *c,
 
 	l2.start = mlx_line_eqget_cameraview(&p1, line->start, c);
 	l2.end = mlx_line_eqget_cameraview(&p2, line->end, c);
+	if (!(mlx_eqget_line_cone_intersect(&l2)))
+		return ;
+	//ft_putchar('|');
 	mlx_line_put_line_to_image(&l2, im, c, colour);
 }
