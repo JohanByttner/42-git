@@ -6,14 +6,16 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/01/09 01:14:23 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/01/10 23:31:28 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=fractol
-SRC=	main.c							\
-		mandelbrot.c
-
+SRC=	main.c								\
+		mandelbrot.c						\
+		julia.c								\
+		fractol_put_mandelbrot_to_image.c	\
+		fractol_put_julia_to_image.c
 
 ROOTDIR=./
 LIBDIR=$(ROOTDIR)

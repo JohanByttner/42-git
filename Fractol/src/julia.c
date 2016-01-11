@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 22:52:05 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/10 14:35:00 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/09 17:09:55 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/11 00:42:17 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 ** http://linas.org/art-gallery/escape/escape.html
 */
 
-double	mandelbrot(t_complex *c)
+double	julia(t_complex *z_val, t_complex *c)
 {
 	t_complex	z;
 	t_complex	tmp;
 	int			iter_count;
 	double		mu;
 
-	z = (t_complex){ 0, 0 };
+	mlx_copy_point2d(&z, z_val);
 	iter_count = 0;
 	while (iter_count < 100 && mlx_abs_point2d(&z) < 2.0)
 	{
