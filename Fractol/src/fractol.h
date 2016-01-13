@@ -6,15 +6,20 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 21:57:55 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/11 20:46:42 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/13 23:13:12 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# define MANDELBROT_COLOUR 5.0
-# define JULIA_COLOUR 5.0
 # include "libmlxutil.h"
+# define FRACTOL_JULIA_CSCALE 0.0005
+
+typedef struct	s_centre
+{
+	t_complex	centre;
+	double		radius;
+}				t_centre;
 
 /*
 ** This struct is zero-initialised on program start.
@@ -25,17 +30,14 @@ typedef struct	s_fractol_config
 {
 	int			render_julia;
 	t_colour	depth_julia;
+	t_centre	centre_julia;
+	t_complex	complex_julia;
 	int			render_mandelbrot;
 	t_colour	depth_mandelbrot;
+	t_centre	centre_mandelbrot;
 	int			screen_width;
 	int			screen_height;
 }				t_fractol_config;
-
-typedef struct	s_centre
-{
-	t_complex	centre;
-	double		radius;
-}				t_centre;
 
 t_fractol_config		*fractol_get_config(void);
 
@@ -51,7 +53,15 @@ void					fractol_put_julia_to_image(t_mlx_image *img,
 
 int						fractol_read_options(int ac, char **av);
 
-int						fractol_load_screens(void);
+int						fractol_load_windows(void);
+
+void					fractol_render_julia(int screen_count);
+
+void					fractol_mouse_hook_julia(int x, int y, void *param);
+
+void					fractol_key_hook(int keycode, void *param);
+
+void					fractol_render_all(void);
 
 void					fractol_exit(int exit_code);
 

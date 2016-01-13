@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/01/11 20:55:31 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/01/13 22:56:38 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,11 @@ SRC=	main.c								\
 		fractol_put_julia_to_image.c		\
 		fractol_get_config.c				\
 		fractol_read_options.c				\
-		fractol_load_screens.c				\
-		fractol_load_images.c				\
+		fractol_load_windows.c				\
+		fractol_render_julia.c				\
+		fractol_mouse_hook_julia.c			\
+		fractol_key_hook.c					\
+		fractol_render_all.c				\
 		fractol_exit.c
 
 ROOTDIR=./

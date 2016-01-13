@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 18:57:26 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/11 20:24:40 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/13 23:06:44 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,31 @@ static void	fractol_set_default_options(t_fractol_config *config)
 {
 	config->screen_width = 1000;
 	config->screen_height = 1000;
-	config->depth_julia = (t_colour){ 5, 9, 14, 0 };
+	config->depth_julia = (t_colour){ 255, 9, 14, 0 };
 	config->depth_mandelbrot = (t_colour) { 15, 0, 0, 0 };
+	config->centre_julia.radius = 2;
+	config->centre_mandelbrot.radius = 2;
+	config->complex_julia = (t_complex){ -0.70176, -0.3842 };
 }
 
 int			fractol_read_options(int ac, char **av)
 {
 	t_fractol_config	*config;
 	int					i;
+	int					screen_count;
 
 	if (ac == 1)
 		fractol_exit(EX_USAGE);
 	i = 0;
+	screen_count = 1;
 	config = fractol_get_config();
 	fractol_set_default_options(config);
 	while (++i < ac)
 	{
 		if (!(ft_strcmp(av[i], "mandelbrot")))
-			config->render_mandelbrot = 1;
+			config->render_mandelbrot = screen_count++;
 		else if (!(ft_strcmp(av[i], "julia")))
-			config->render_julia = 1;
+			config->render_julia = screen_count++;
 		else if (!(ft_strcmp(av[i], "--Resolution")))
 		{
 			if (i + 2 < ac && ft_strisdigit(av[i + 1])

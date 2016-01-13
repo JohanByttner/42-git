@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fractol_key_hook.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 23:53:02 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/13 22:16:36 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/13 22:20:06 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/13 22:35:05 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include "libmlxutil.h"
+#include <sysexits.h>
+#define XK_MISCELLANY 0
+#include <X11/keysymdef.h>
 #include "fractol.h"
 
-int		main(int ac, char **av)
+void	fractol_key_hook(int keycode, void *param)
 {
-	if (fractol_read_options(ac, av))
-	{
-		fractol_load_windows();
-	}
-	//usleep(1000*1000*10);
-	mlx_loop(mlx_get_handler()->init);
-	return (0);
+	if (keycode == XK_Escape && (param || 1))
+		fractol_exit(0);
 }

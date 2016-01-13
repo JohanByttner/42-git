@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fractol_render_all.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/08 23:53:02 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/13 22:16:36 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/13 22:54:03 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/13 22:55:54 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include "libmlxutil.h"
 #include "fractol.h"
 
-int		main(int ac, char **av)
+void	fractol_render_all(void)
 {
-	if (fractol_read_options(ac, av))
+	t_fractol_config	*config;
+	int					screen_count;
+
+	screen_count = 0;
+	config = fractol_get_config();
+	if (config->render_mandelbrot)
 	{
-		fractol_load_windows();
+		screen_count++;
 	}
-	//usleep(1000*1000*10);
-	mlx_loop(mlx_get_handler()->init);
-	return (0);
+	if (config->render_julia)
+	{
+		fractol_render_julia(screen_count++);
+	}
 }
