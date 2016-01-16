@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 20:31:21 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/08 22:50:38 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/16 18:33:06 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <X11/keysymdef.h>
 # include "libft.h"
 # define MLX_MAX_WINDOW_COUNT 2
-# define MLX_IMAGES_BUFF_SIZE 2
+# define MLX_IMAGES_BUFF_SIZE 5
 # define MLX_DEFAULT_CAMERA_MODE 2
 # ifndef MLX_BASE_FOCUS
 #  define MLX_BASE_FOCUS 1000.0
@@ -147,11 +147,17 @@ t_3dpoint			*mlx_eqsub_point(t_3dpoint *res, t_3dpoint *sub);
 
 double				mlx_distance_points(t_3dpoint *p1, t_3dpoint *p2);
 
-t_point				*mlx_copy_point2d(t_point *copy, t_point *point);
+t_point				*mlx_copy_point2d(t_point *restrict copy,
+						t_point *restrict point);
+
+double				mlx_sqabs_point2d(t_point *p);
 
 double				mlx_abs_point2d(t_point *p);
 
-t_point				*mlx_eqadd_point2d(t_point *p1, t_point *p2);
+int					mlx_cmp_points2d(t_point *p1, t_point *p2);
+
+t_point				*mlx_eqadd_point2d(t_point *restrict p1,
+						t_point *restrict p2);
 
 t_3dline			*mlx_new_line(t_3dpoint *p1, t_3dpoint *p2);
 
@@ -213,7 +219,8 @@ t_fmatrix			*mlx_eqmul_fmatrix(t_fmatrix *res, t_fmatrix *a,
 
 t_fmatrix			*mlx_eqtranspose_fmatrix(t_fmatrix *res, t_fmatrix *input);
 
-t_point				*mlx_eqfmatrix_to_point2d(t_point *p, t_fmatrix *m);
+t_point				*mlx_eqfmatrix_to_point2d(t_point *restrict p,
+						t_fmatrix *restrict m);
 
 t_3dpoint			*mlx_eqfmatrix_to_point(t_3dpoint *p, t_fmatrix *m);
 
@@ -246,7 +253,10 @@ void				mlx_set_image_pixel(t_mlx_image *im, t_colour *colour,
 t_colour			*mlx_new_colour(unsigned char red, unsigned char green,
 						unsigned char blue, char endian);
 
-int					mlx_get_colour_int(t_colour *colour, t_mlx_image *im);
+int					mlx_cmp_colours(t_colour *c1, t_colour *c2);
+
+int					mlx_get_colour_int(t_colour *restrict colour,
+						t_mlx_image *restrict im);
 
 t_complex			*mlx_eqmul_complex(t_complex *res, t_complex *c1,
 						t_complex *c2);

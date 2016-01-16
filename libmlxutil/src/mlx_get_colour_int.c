@@ -6,21 +6,17 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/23 18:29:33 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/26 17:15:25 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/16 18:50:08 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
 #include <mlx.h>
 
-/*
-** TODO: Fix massive placeholder
-*/
-
-int		mlx_get_colour_int(t_colour *colour, t_mlx_image *im)
+int		mlx_get_colour_int(t_colour *restrict colour, t_mlx_image *restrict im)
 {
 	int				val;
-	unsigned char	*ptr;
+	unsigned char	*restrict ptr;
 
 	val = 0;
 	ptr = (unsigned char *)(&val);

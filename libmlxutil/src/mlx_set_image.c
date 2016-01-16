@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 16:47:29 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/23 21:03:21 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/10 12:57:33 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_mlx_image		*mlx_set_image(int id, int size_x, int size_y)
 
 	if (!(handler = mlx_get_handler()))
 		return (0);
-	if (0 < id || handler->image_count + MLX_IMAGES_BUFF_SIZE <= id)
+	if (0 > id || handler->image_count + MLX_IMAGES_BUFF_SIZE <= id)
 		return (0);
 	else if (handler->image_count <= id)
 	{
@@ -52,7 +52,7 @@ t_mlx_image		*mlx_set_image(int id, int size_x, int size_y)
 				sizeof(t_mlx_image) * handler->image_count)))
 			return (0);
 	}
-	image = &(handler->images[id]);
+	image = handler->images + id;
 	if (mlx_static_load_image(image, size_x, size_y))
 		return (image);
 	else
