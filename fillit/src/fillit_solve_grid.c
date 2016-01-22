@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   fillit_solve_grid.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 15:35:34 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/11/29 00:22:52 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/21 23:21:14 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/21 23:31:47 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fillit.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+static int	fillit_place_shape(int *shape, char *grid, size_t size, size_t i)
 {
-	size_t	little_len;
+	
+}
 
-	if (*little != '\0')
-	{
-		little_len = ft_strlen(little);
-		while (*big != '\0' && len >= little_len)
-		{
-			if (ft_strncmp(big, little, little_len) == 0)
-				return ((char *)big);
-			big++;
-			len--;
-		}
-		return (0);
-	}
-	return ((char *)big);
+static int	fillit_grid_recursor(int *shape, char *grid, size_t size)
+{
+	size_t	i;
+
+
+}
+
+char		*fillit_validate_grid(const int **shapes)
+{
+
 }

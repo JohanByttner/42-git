@@ -6,15 +6,38 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 12:27:10 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/01 12:34:19 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/21 22:38:40 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "get_next_line.h"
+#include <sys/stat.h>
+#include <fcntl.h>
+#include "fillit.h"
 
 int	main(int argc, char **argv)
 {
-	*argv = 0;
+	int		fd;
+	int		**ptr;
+	int		i;
+
+	if (argc == 2)
+		if ((fd = open(argv[1], O_RDONLY)) >= 0)
+		{
+			ptr = fillit_read_file(fd);
+			ft_putstr("\nNew String\n");
+			while (*ptr)
+			{
+				ft_putstr("\nptr\n");
+				i = 0;
+				while (i < 8)
+				{
+					ft_putnbr((*ptr)[i]);
+					ft_putstr(" | ");
+					i++;
+				}
+				ptr++;
+				ft_putchar('\n');
+			}
+		}
 	return (argc);
 }

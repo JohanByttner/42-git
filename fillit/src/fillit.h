@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/27 15:15:18 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/11/27 15:15:47 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/21 16:46:19 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/21 21:03:13 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "libft.h"
+#ifndef FILLIT_H
+# define FILLIT_H
+# include <stdlib.h>
+# include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
+void	fillit_exit(int exit_code);
+
+int		**fillit_read_file(int fd);
+#endif

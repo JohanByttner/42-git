@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strequ.c                                        :+:      :+:    :+:   */
+/*   fillit_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 17:15:31 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/11/25 17:18:35 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/21 20:39:46 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/21 21:21:53 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
+#include "fillit.h"
 
-int	ft_strnequ(const char *s1, const char *s2, size_t n)
+void	fillit_exit(int exit_code)
 {
-	return (!ft_strncmp(s1, s2, n));
+	ft_putnbr_fd(exit_code, 2);
+	ft_putstr_fd(" Erreur\n", 2);
+	exit(exit_code);
 }

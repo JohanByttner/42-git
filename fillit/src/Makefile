@@ -6,14 +6,17 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2015/12/01 12:36:09 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/01/21 20:59:27 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=fillit
-SRC=main.c
-ROOTDIR=
-LIBDIR=$(ROOTDIR)./
+SRC=main.c					\
+		fillit_read_file.c	\
+		fillit_exit.c		\
+		get_next_line.c
+ROOTDIR=./
+LIBDIR= libft/ -lft
 BINDIR=$(ROOTDIR)./
 INCDIR=$(ROOTDIR)libft/includes -IGet_Next_Line/
 BUILDDIR=$(ROOTDIR)./
@@ -33,12 +36,13 @@ libft:
 	make -C libft/
 
 $(NAME):	libft
-	$(CC) -o $(NAME) $(CFLAGS) -I$(INCDIR) $(SRC)
+	$(CC) -c $(CFLAGS) -I$(INCDIR) $(SRC)
+	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) -L $(LIBDIR)
 
 clean:
 	$(RM) $(OBJ)
 
 fclean:	clean
-	$(RM) $(LIBDIR)$(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
