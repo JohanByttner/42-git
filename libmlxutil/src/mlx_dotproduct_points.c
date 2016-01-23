@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_eqmul_complex.c                                :+:      :+:    :+:   */
+/*   mlx_dotproduct_points.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/07 21:14:41 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/16 19:10:44 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/22 21:36:35 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/22 21:49:46 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
 
-t_complex	*mlx_eqmul_complex(t_complex *restrict res, t_complex *restrict c1,
-			t_complex *restrict c2)
+double	mlx_dotproduct_points(t_3dpoint *a, t_3dpoint *b)
 {
-	res->i = c1->i * c2->i - c1->j * c2->j;
-	res->j = c1->i * c2->j + c2->i * c1->j;
-	return (res);
+	double	value;
+	value = a->i * b->i;
+	value += a->j * b->j;
+	value += a->k * b->k;
+	return (value);
 }

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_eqmul_complex.c                                :+:      :+:    :+:   */
+/*   mlx_eqmul_point.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/07 21:14:41 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/16 19:10:44 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/22 21:49:57 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/22 21:55:38 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
 
-t_complex	*mlx_eqmul_complex(t_complex *restrict res, t_complex *restrict c1,
-			t_complex *restrict c2)
+t_3dpoint	*mlx_eqmul_point(t_3dpoint *point, double mul)
 {
-	res->i = c1->i * c2->i - c1->j * c2->j;
-	res->j = c1->i * c2->j + c2->i * c1->j;
-	return (res);
+	point->i *= mul;
+	point->j *= mul;
+	point->k *= mul;
+	return (point);
 }

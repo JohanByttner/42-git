@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_eqmul_complex.c                                :+:      :+:    :+:   */
+/*   mlx_eqnormal_plane.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/07 21:14:41 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/16 19:10:44 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/01/22 21:42:23 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/01/22 21:48:25 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
 
-t_complex	*mlx_eqmul_complex(t_complex *restrict res, t_complex *restrict c1,
-			t_complex *restrict c2)
+t_3dpoint	*mlx_eqnormal_plane(t_3dpoint *normal, t_3dplane *surface)
 {
-	res->i = c1->i * c2->i - c1->j * c2->j;
-	res->j = c1->i * c2->j + c2->i * c1->j;
-	return (res);
+	t_3dpoint	v1;
+	t_3dpoint	v2;
+
+	mlx_eqsub_point(mlx_copy_point(&v1, surface->left), surface->centre);
+	mlx_eqsub_point(mlx_copy_point(&v2, surface->right), surface->centre);
+	return (mlx_eqcrossproduct_points(normal, &v1, &v2));
 }

@@ -10,10 +10,10 @@
 */
 
 t_3dpoint	*mlx_eqcrossproduct_points(t_3dpoint *res, t_3dpoint *a,
-				t_3dpoint *b, t_3dpoint *n)
+				t_3dpoint *b)
 {
-	res->i = n->i * (a->j * b->k - a->k * b->j);
-	res->j = n->j * (a->i * b->k - a->k * b->j);
-	res->k = n->k * (a->i * b->j - a->j * b->i);
+	res->i = (a->j * b->k - a->k * b->j);
+	res->j = (a->i * b->k - a->k * b->j);
+	res->k = (a->i * b->j - a->j * b->i);
 	return (res);
 }
