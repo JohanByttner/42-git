@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/01 12:27:10 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/21 22:38:40 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/01/25 14:36:39 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 		{
 			ptr = fillit_read_file(fd);
 			ft_putstr("\nNew String\n");
+			fillit_print_grid(fillit_validate_grid(ptr));
 			while (*ptr)
 			{
 				ft_putstr("\nptr\n");
