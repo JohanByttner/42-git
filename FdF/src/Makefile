@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/01/03 20:05:56 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/02/02 21:45:31 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,12 @@ ROOTDIR=./
 LIBDIR=$(ROOTDIR)
 BINDIR=$(ROOTDIR)
 INCDIR=$(ROOTDIR)get_next_line/
-LDDIR= libft/ -L libmlxutil/ -L /usr/local/lib
+LDDIR= libft/ -L libmlxutil/
 BUILDDIR=$(ROOTDIR)
 DIR=./
+
+LIBLX= -L/usr/local/lib -lXext -lX11
+LIBMAC= -L libmlxutil/minilibx_macos -framework OpenGL -framework AppKit
 
 OBJ=$(SRC:.c=.o)
 CC=gcc
@@ -53,7 +56,7 @@ $(NAME):	libft libmlxutil
 		-I libmlxutil/includes -I libft/includes	\
 		-I /usr/include/X11
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L $(LDDIR)	\
-		-lmlxutil -lft -lmlx -lXext -lX11 -lm
+		-lmlxutil -lft -lmlx -lm $(LIBMAC)
 
 clean:
 	$(RM) $(OBJ)

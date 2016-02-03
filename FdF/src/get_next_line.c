@@ -6,12 +6,11 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 19:18:45 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/26 19:54:05 by jbyttner         ###   ########.fr       */
+/*   Updated: 2015/12/03 16:24:24 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <unistd.h>
 #include "get_next_line.h"
 #include "libft.h"
 

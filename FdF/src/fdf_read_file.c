@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/26 17:19:52 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/02 21:28:33 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/03 20:54:04 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ static t_list	*fdf_read_row_line(char *s1, char *s2, int row, int index)
 	p2.j = row * FDF_SCALING;
 	if (!(line = mlx_new_line(&p1, &p2)))
 		return (0);
-	if (!(colour = mlx_new_colour(0, 255, 0, -1)))
-	{
-		free(line);
-		return (0);
-	}
-	line->colour = colour;
+	if (!(line->colour = mlx_new_colour(0, (unsigned char)(-p1.k * 15 + 100), 0, -1))
+		|| !(line->colour2 = mlx_new_colour(0, (unsigned char)(-p2.k * 15 + 100), 0, -1)))
+		{
+			free(line);
+			return (0);
+		}
 	return (ft_lstnew(line, sizeof(*line)));
 }
 
@@ -54,7 +54,8 @@ static void		fdf_read_row(char *line, int row, t_list **alst)
 
 	strp = ft_strsplit(line, ' ');
 	index = -1;
-	if (!(strp) || !(s2 = *strp));
+	if (!(strp) || !(s2 = *strp))
+        ;
 	else if (!(*(strp + 1)))
 	{
 		s1 = s2;
