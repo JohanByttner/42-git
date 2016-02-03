@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/02/02 21:45:31 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/02/03 22:56:42 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,14 @@ SRC=	main.c							\
 ROOTDIR=./
 LIBDIR=$(ROOTDIR)
 BINDIR=$(ROOTDIR)
-INCDIR=$(ROOTDIR)get_next_line/
-LDDIR= libft/ -L libmlxutil/
+INCDIR=$(ROOTDIR)get_next_line/ -I libft/includes -I libmlxutil/includes	\
+					-I/usr/local/includes -I/usr/X11/includes
+LDDIR= libft/ -L libmlxutil/ -lmlxutil -lm -lft
 BUILDDIR=$(ROOTDIR)
 DIR=./
 
-LIBLX= -L/usr/local/lib -lXext -lX11
-LIBMAC= -L libmlxutil/minilibx_macos -framework OpenGL -framework AppKit
+LIBLX= -L/usr/local/lib -lmlx -lXext -lX11
+LIBMAC= -L libmlxutil/minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
 OBJ=$(SRC:.c=.o)
 CC=gcc
@@ -50,13 +51,17 @@ libmlxutil:
 	make -C libmlxutil/ fclean
 	make -C libmlxutil/
 
-$(NAME):	libft libmlxutil
+compile:
 	cp get_next_line/get_next_line.c .
-	$(CC) $(CFLAGS) -c -I$(INCDIR) $(SRC) -I/usr/local/include	\
-		-I libmlxutil/includes -I libft/includes	\
-		-I /usr/include/X11
+	$(CC) $(CFLLAGS) -c -I$(INCDIR) $(SRC)
+
+$(NAME):	libft libmlxutil compile
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L $(LDDIR)	\
-		-lmlxutil -lft -lmlx -lm $(LIBMAC)
+		$(LIBMAC)
+
+linux:		libft libmlxutil compile
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L $(LDDIR)	\
+		$(LIBLX)
 
 clean:
 	$(RM) $(OBJ)
