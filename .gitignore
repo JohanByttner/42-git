@@ -43,3 +43,11 @@ Thumbs.db
 # Temporary Files #
 ###################
 *.swp
+
+# 42 specific #
+libft.a
+libmlxutil.a
+fillit
+fdf
+fractol
+wolf3d
