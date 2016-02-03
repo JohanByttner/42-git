@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/04 21:34:28 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/03 13:17:26 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/03 18:56:19 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ static inline void        mlx_eqget_line_cone_intersect_values(t_3dline *line,
 	double      *m_arr_arr;
 	t_3dpoint   u;
 
-	m_arr_arr = (double [18]){ -0.5, 0, 0, 0, -0.5, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	m_arr_arr = (double [20]){ -0.62, 0, 0, 0, -0.62, 0, 0, 0, 0.38, 0, 0, 0, 0,
+		0, 0, 0, 0, 0, 0, 0 };
 	m_arr[0].width = 3;
 	m_arr[0].height = 3;
 	m_arr[0].value = m_arr_arr;
 	m_arr[1].value = m_arr_arr + 9;
-	m_arr[2].value = m_arr_arr + 9 + 3;
-	m_arr[3].value = m_arr_arr + 9 + 3 + 3;
+	m_arr[2].value = m_arr_arr + 9 + 4;
+	m_arr[3].value = m_arr_arr + 9 + 4 + 4;
 	mlx_eqnormalize_point(mlx_eqsub_point(mlx_copy_point(&u, line->end), line->start));
 	mlx_eqpoint_to_fmatrix(&m_arr[1], &u);
 	mlx_eqtranspose_fmatrix(&m_arr[2], &m_arr[1]);
@@ -40,7 +41,7 @@ static inline void        mlx_eqget_line_cone_intersect_values(t_3dline *line,
 	mlx_eqmul_fmatrix(&m_arr[1], &m_arr[2], &m_arr[3]);
 	c[2] = m_arr[1].value[0];
 	mlx_eqpoint_to_fmatrix(&m_arr[1], line->start);
-	mlx_eqmul_fmatrix(&m_arr[2], &m_arr[0], &m_arr[1]);
+	mlx_eqmul_fmatrix(&m_arr[3], &m_arr[0], &m_arr[1]);
 	mlx_eqmul_fmatrix(&m_arr[1], &m_arr[2], &m_arr[3]);
 	c[1] = m_arr[1].value[0];
 	mlx_eqpoint_to_fmatrix(&m_arr[1], line->start);
@@ -81,8 +82,8 @@ static inline t_3dline    *mlx_line_cone_sanity_checks(t_3dline *restrict line,
 static inline t_3dline    *mlx_eqget_line_in_cone(t_3dline *restrict line,
 		double *restrict c, double *restrict t)
 {
-	if (line->start->k * (1 - c[0] / c[2]) + line->end->k * c[0] / c[2] > 0
-			&& line->start->k * (1 - c[1] / c[2]) + line->end->k * c[1] / c[2] > 0)
+	if (line->start->k * (1 - c[3]) + line->end->k * c[3] > 0
+			&& line->start->k * (1 - c[4]) + line->end->k * c[4] > 0)
 	{
 		t[0] = c[0] < 0 ? 0 : c[0];
 		t[1] = c[1] > c[2] ? c[2] : c[1];
@@ -91,36 +92,35 @@ static inline t_3dline    *mlx_eqget_line_in_cone(t_3dline *restrict line,
 		t[0] /= c[2];
 		t[1] /= c[2];
 	}
-	else if (line->start->k * (1 - c[0] / c[2]) + line->end->k * c[0] / c[2] > 0)
+	else if (line->start->k * (1 - c[3]) + line->end->k * c[3] > 0)
 	{
-		if (c[0] < 0)
+		if (c[3] < 0)
 			return (0);
-		t[1] = c[0] / c[2];
+		t[1] = c[3] > 1 ? 1 : c[3];
 		t[0] = 0;
 	}
-	else if (line->start->k * (1 - c[1] / c[2]) + line->end->k * c[1] / c[2] > 0)
-	{
-		if (c[1] > c[2])
+	else if (line->start->k * (1 - c[4]) + line->end->k * c[4] > 0)
+	{	
+		if (c[4] > 1)
 			return (0);
-		t[0] = c[1] / c[2];
-		t[1] = 1;
+		t[0] = c[4] < 0 ? 0 : -c[4];
+		t[1] = 5;
 	}
 	else
 		return (0);
 	return (mlx_line_cone_sanity_checks(line, t));
 }
 
-
-
 t_3dline    *mlx_eqget_line_cone_intersect(t_3dline *line)
 {
-	double      c[3];
+	double      c[5];
 	double      t[2];
 	double      delta[2];
 
 	mlx_eqget_line_cone_intersect_values(line, c);
+
 	delta[0] = c[1] * c[1] - c[0] * c[2];
-	if (delta[0] > 0 && c[2] != 0)
+		if (delta[0] > 0 && c[2] != 0)
 	{
 		delta[1] = sqrt(delta[0]);
 		t[0] = (-c[1] - delta[1]) / c[2];
@@ -128,6 +128,8 @@ t_3dline    *mlx_eqget_line_cone_intersect(t_3dline *line)
 		c[0] = fmin(t[0], t[1]);
 		c[1] = fmax(t[0], t[1]);
 		c[2] = mlx_distance_points(line->start, line->end);
+		c[3] = c[0] / c[2];
+		c[4] = c[1] / c[2];
 		return (mlx_eqget_line_in_cone(line, c, t));
 	}
 	else
