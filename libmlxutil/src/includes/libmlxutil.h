@@ -6,14 +6,14 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 20:31:21 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/16 18:33:06 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/03 19:49:00 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LIBMLXUTIL_H
 # define FT_LIBMLXUTIL_H
-# include <X11/keysymdef.h>
 # include "libft.h"
+# include "xheader.h"
 # define MLX_MAX_WINDOW_COUNT 2
 # define MLX_IMAGES_BUFF_SIZE 5
 # define MLX_DEFAULT_CAMERA_MODE 2
@@ -113,6 +113,7 @@ typedef struct		s_3dline
 	t_3dpoint		*start;
 	t_3dpoint		*end;
 	t_colour		*colour;
+	t_colour		*colour2;
 }					t_3dline;
 
 typedef struct		s_line
@@ -138,6 +139,8 @@ t_3dpoint			*mlx_get_point(int i, int j, int k);
 int					mlx_cmp_points(t_3dpoint *p1, t_3dpoint *p2);
 
 t_3dpoint			*mlx_copy_point(t_3dpoint *copy, t_3dpoint *input);
+
+t_3dpoint			*mlx_dup_point(t_3dpoint *point);
 
 t_3dpoint			*mlx_eqnormalize_point(t_3dpoint *point);
 
