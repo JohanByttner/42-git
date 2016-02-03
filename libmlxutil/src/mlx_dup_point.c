@@ -6,13 +6,13 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/17 11:08:03 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/17 12:12:24 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/03 11:40:55 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
 
-t_3dpoint	mlx_dup_point(t_3dpoint *point)
+t_3dpoint	*mlx_dup_point(t_3dpoint *point)
 {
 	t_3dpoint *dup;
 

@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/04 21:34:28 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/11 18:47:11 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/03 13:17:26 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,122 @@
 ** See http://www.geometrictools.com/Documentation/IntersectionLineCone.pdf
 */
 
-t_3dline	*mlx_eqget_line_cone_intersect(t_3dline *line)
+static inline void        mlx_eqget_line_cone_intersect_values(t_3dline *line,
+		double *c)
+{
+	t_fmatrix   m_arr[4];
+	double      *m_arr_arr;
+	t_3dpoint   u;
+
+	m_arr_arr = (double [18]){ -0.5, 0, 0, 0, -0.5, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	m_arr[0].width = 3;
+	m_arr[0].height = 3;
+	m_arr[0].value = m_arr_arr;
+	m_arr[1].value = m_arr_arr + 9;
+	m_arr[2].value = m_arr_arr + 9 + 3;
+	m_arr[3].value = m_arr_arr + 9 + 3 + 3;
+	mlx_eqnormalize_point(mlx_eqsub_point(mlx_copy_point(&u, line->end), line->start));
+	mlx_eqpoint_to_fmatrix(&m_arr[1], &u);
+	mlx_eqtranspose_fmatrix(&m_arr[2], &m_arr[1]);
+	mlx_eqmul_fmatrix(&m_arr[3], &m_arr[0], &m_arr[1]);
+	mlx_eqmul_fmatrix(&m_arr[1], &m_arr[2], &m_arr[3]);
+	c[2] = m_arr[1].value[0];
+	mlx_eqpoint_to_fmatrix(&m_arr[1], line->start);
+	mlx_eqmul_fmatrix(&m_arr[2], &m_arr[0], &m_arr[1]);
+	mlx_eqmul_fmatrix(&m_arr[1], &m_arr[2], &m_arr[3]);
+	c[1] = m_arr[1].value[0];
+	mlx_eqpoint_to_fmatrix(&m_arr[1], line->start);
+	mlx_eqtranspose_fmatrix(&m_arr[2], &m_arr[1]);
+	mlx_eqmul_fmatrix(&m_arr[3], &m_arr[0], &m_arr[1]);
+	mlx_eqmul_fmatrix(&m_arr[1], &m_arr[2], &m_arr[3]);
+	c[0] = m_arr[1].value[0];
+}
+
+static inline t_3dline    *mlx_line_cone_sanity_checks(t_3dline *restrict line,
+		double *restrict t)
+{
+	t_3dpoint   u;
+
+	if (t[0] == t[1] || isnan(t[0]) || isnan(t[1]))
+		return (0); 
+	if (t[0] > 0)
+	{
+		u.i  = (1 - t[0]) * line->start->i + t[0] * line->end->i;
+		u.j = (1 - t[0]) * line->start->j + t[0] * line->end->j;
+		u.k = (1 - t[0]) * line->start->k + t[0] * line->end->k;
+	}
+	if (t[1] < 1)
+	{
+		line->end->i = (1 - t[1]) * line->start->i + t[1] * line->end->i;
+		line->end->j = (1 - t[1]) * line->start->j + t[1] * line->end->j;
+		line->end->k = (1 - t[1]) * line->start->k + t[1] * line->end->k;
+	}
+	if (t[0] > 0)
+	{
+		line->start->i = u.i;
+		line->start->j = u.j;
+		line->start->k = u.k;
+	}
+	return (line);
+}
+
+static inline t_3dline    *mlx_eqget_line_in_cone(t_3dline *restrict line,
+		double *restrict c, double *restrict t)
+{
+	if (line->start->k * (1 - c[0] / c[2]) + line->end->k * c[0] / c[2] > 0
+			&& line->start->k * (1 - c[1] / c[2]) + line->end->k * c[1] / c[2] > 0)
+	{
+		t[0] = c[0] < 0 ? 0 : c[0];
+		t[1] = c[1] > c[2] ? c[2] : c[1];
+		if (t[0] > c[2] || t[1] < 0)
+			return (0);
+		t[0] /= c[2];
+		t[1] /= c[2];
+	}
+	else if (line->start->k * (1 - c[0] / c[2]) + line->end->k * c[0] / c[2] > 0)
+	{
+		if (c[0] < 0)
+			return (0);
+		t[1] = c[0] / c[2];
+		t[0] = 0;
+	}
+	else if (line->start->k * (1 - c[1] / c[2]) + line->end->k * c[1] / c[2] > 0)
+	{
+		if (c[1] > c[2])
+			return (0);
+		t[0] = c[1] / c[2];
+		t[1] = 1;
+	}
+	else
+		return (0);
+	return (mlx_line_cone_sanity_checks(line, t));
+}
+
+
+
+t_3dline    *mlx_eqget_line_cone_intersect(t_3dline *line)
+{
+	double      c[3];
+	double      t[2];
+	double      delta[2];
+
+	mlx_eqget_line_cone_intersect_values(line, c);
+	delta[0] = c[1] * c[1] - c[0] * c[2];
+	if (delta[0] > 0 && c[2] != 0)
+	{
+		delta[1] = sqrt(delta[0]);
+		t[0] = (-c[1] - delta[1]) / c[2];
+		t[1] = (-c[1] + delta[1]) / c[2];
+		c[0] = fmin(t[0], t[1]);
+		c[1] = fmax(t[0], t[1]);
+		c[2] = mlx_distance_points(line->start, line->end);
+		return (mlx_eqget_line_in_cone(line, c, t));
+	}
+	else
+		return (0);
+}
+
+t_3dline	*mlx_eqget_line_cone_intersect_old(t_3dline *line)
 {
 	t_fmatrix	transpose;
 	double		transpose_arr[3];
@@ -78,7 +193,7 @@ t_3dline	*mlx_eqget_line_cone_intersect(t_3dline *line)
 		//c0 /= c2;
 		//c1 /= c2;
 		if (line->start->k * (1 - c0 / c2) + line->end->k * c0 / c2 > 0
-			&& line->start->k * (1 - c1 / c2) + line->end->k * c1 / c2 > 0)
+				&& line->start->k * (1 - c1 / c2) + line->end->k * c1 / c2 > 0)
 		{
 			t0 = c0 < 0 ? 0 : c0;
 			t1 = c1 > c2 ? c2 : c1;
@@ -91,39 +206,39 @@ t_3dline	*mlx_eqget_line_cone_intersect(t_3dline *line)
 			//t0 = c0 < 0 ? 0 : c0;
 			//t1 = c1 > 1 ? 1 : c1;
 			/*if (t0 < t1)
-			{
-				if (t0 > 1 || t1 < 0)
-					return (0);
-				t0 = t0 < 0 ? 0 : t0;
-				t1 = t1 > 1 ? 1 : t1;
-			}
-			else if (t0 > t1)
-			{
-				if (t1 > 1 || t0 < 0)
-					return (0);
-				t0 = t0 > 1 ? 1 : t0;
-				t1 = t1 < 0 ? 0 : t1;
-			}*/
+			  {
+			  if (t0 > 1 || t1 < 0)
+			  return (0);
+			  t0 = t0 < 0 ? 0 : t0;
+			  t1 = t1 > 1 ? 1 : t1;
+			  }
+			  else if (t0 > t1)
+			  {
+			  if (t1 > 1 || t0 < 0)
+			  return (0);
+			  t0 = t0 > 1 ? 1 : t0;
+			  t1 = t1 < 0 ? 0 : t1;
+			  }*/
 			/*if (t0 == t1 || isnan(t0) || isnan(t1))
-				return (0);
+			  return (0);
 			//printf("|%lf|%lf|%d|%d|%d|\n", t0, t1, isnan(t0), isnan(t1), isnan(1.0));
 			if (t0 > 0)
 			{
-				u.i  = (1 - t0) * line->start->i + t0 * line->end->i;
-				u.j = (1 - t0) * line->start->j + t0 * line->end->j;
-				u.k = (1 - t0) * line->start->k + t0 * line->end->k;
+			u.i  = (1 - t0) * line->start->i + t0 * line->end->i;
+			u.j = (1 - t0) * line->start->j + t0 * line->end->j;
+			u.k = (1 - t0) * line->start->k + t0 * line->end->k;
 			}
 			if (t1 < 1)
 			{
-				line->end->i = (1 - t1) * line->start->i + t1 * line->end->i;
-				line->end->j = (1 - t1) * line->start->j + t1 * line->end->j;
-				line->end->k = (1 - t1) * line->start->k + t1 * line->end->k;
+			line->end->i = (1 - t1) * line->start->i + t1 * line->end->i;
+			line->end->j = (1 - t1) * line->start->j + t1 * line->end->j;
+			line->end->k = (1 - t1) * line->start->k + t1 * line->end->k;
 			}
 			if (t0 > 0)
 			{
-				line->start->i = u.i;
-				line->start->j = u.j;
-				line->start->k = u.k;
+			line->start->i = u.i;
+			line->start->j = u.j;
+			line->start->k = u.k;
 			}
 			return (line);*/
 		}
@@ -144,45 +259,45 @@ t_3dline	*mlx_eqget_line_cone_intersect(t_3dline *line)
 		else
 			return (0);
 		/*if (t0 < t1)
-			{
-				if (t0 > 1 || t1 < 0)
-					return (0);
-				t0 = t0 < 0 ? 0 : t0;
-				t1 = t1 > 1 ? 1 : t1;
-			}
-			else if (t0 > t1)
-			{
-				if (t1 > 1 || t0 < 0)
-					return (0);
-				t0 = t0 > 1 ? 1 : t0;
-				t1 = t1 < 0 ? 0 : t1;
-		}*/
+		  {
+		  if (t0 > 1 || t1 < 0)
+		  return (0);
+		  t0 = t0 < 0 ? 0 : t0;
+		  t1 = t1 > 1 ? 1 : t1;
+		  }
+		  else if (t0 > t1)
+		  {
+		  if (t1 > 1 || t0 < 0)
+		  return (0);
+		  t0 = t0 > 1 ? 1 : t0;
+		  t1 = t1 < 0 ? 0 : t1;
+		  }*/
 		if (t0 == t1 || isnan(t0) || isnan(t1))
-				return (0);
-			//printf("|%lf|%lf|%d|%d|%d|\n", t0, t1, isnan(t0), isnan(t1), isnan(1.0));
-			if (t0 > 0)
-			{
-				u.i  = (1 - t0) * line->start->i + t0 * line->end->i;
-				u.j = (1 - t0) * line->start->j + t0 * line->end->j;
-				u.k = (1 - t0) * line->start->k + t0 * line->end->k;
-			}
-			if (t1 < 1)
-			{
-				line->end->i = (1 - t1) * line->start->i + t1 * line->end->i;
-				line->end->j = (1 - t1) * line->start->j + t1 * line->end->j;
-				line->end->k = (1 - t1) * line->start->k + t1 * line->end->k;
-			}
-			if (t0 > 0)
-			{
-				line->start->i = u.i;
-				line->start->j = u.j;
-				line->start->k = u.k;
-			}
-			//printf("|%lf|%lf|%lf|%lf|%lf|%lf|%lf|%lf|\n", line->start->i,
-			//	line->start->j, line->start->k,
-			//	line->end->i, line->end->j, line->end->k,
-			//	t0, t1);
-			return (line);
+			return (0);
+		//printf("|%lf|%lf|%d|%d|%d|\n", t0, t1, isnan(t0), isnan(t1), isnan(1.0));
+		if (t0 > 0)
+		{
+			u.i  = (1 - t0) * line->start->i + t0 * line->end->i;
+			u.j = (1 - t0) * line->start->j + t0 * line->end->j;
+			u.k = (1 - t0) * line->start->k + t0 * line->end->k;
+		}
+		if (t1 < 1)
+		{
+			line->end->i = (1 - t1) * line->start->i + t1 * line->end->i;
+			line->end->j = (1 - t1) * line->start->j + t1 * line->end->j;
+			line->end->k = (1 - t1) * line->start->k + t1 * line->end->k;
+		}
+		if (t0 > 0)
+		{
+			line->start->i = u.i;
+			line->start->j = u.j;
+			line->start->k = u.k;
+		}
+		//printf("|%lf|%lf|%lf|%lf|%lf|%lf|%lf|%lf|\n", line->start->i,
+		//	line->start->j, line->start->k,
+		//	line->end->i, line->end->j, line->end->k,
+		//	t0, t1);
+		return (line);
 
 	}
 	else
