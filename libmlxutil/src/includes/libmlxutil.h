@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 20:31:21 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/03 19:49:00 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/03 20:31:52 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,9 @@ t_point				*mlx_eqadd_point2d(t_point *restrict p1,
 
 t_3dline			*mlx_new_line(t_3dpoint *p1, t_3dpoint *p2);
 
+t_3dline			*mlx_set_line_colours(t_3dline *line,
+						t_colour *c1, t_colour *c2);
+
 void				mlx_render_lline(t_list *lline, t_mlx_camera *camera,
 						t_mlx_image *img);
 
@@ -256,7 +259,14 @@ void				mlx_set_image_pixel(t_mlx_image *im, t_colour *colour,
 t_colour			*mlx_new_colour(unsigned char red, unsigned char green,
 						unsigned char blue, char endian);
 
+t_colour			*mlx_dup_colour(t_colour *colour);
+
+t_colour			*mlx_copy_colour(t_colour *res, t_colour *colour);
+
 int					mlx_cmp_colours(t_colour *c1, t_colour *c2);
+
+t_colour			*mlx_gradient_colours(t_colour *res, t_colour *c1,
+						t_colour *c2, double grade);
 
 int					mlx_get_colour_int(t_colour *restrict colour,
 						t_mlx_image *restrict im);

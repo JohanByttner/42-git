@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/01/08 22:50:07 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/02/03 20:34:58 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC=	mlx_get_handler.c				\
 		mlx_get_point.c					\
 		mlx_cmp_points.c				\
 		mlx_copy_point.c				\
+		mlx_dup_point.c					\
 		mlx_eqnormalize_point.c			\
 		mlx_abs_point.c					\
 		mlx_eqsub_point.c				\
@@ -30,6 +31,7 @@ SRC=	mlx_get_handler.c				\
 		mlx_abs_point2d.c				\
 		mlx_eqadd_point2d.c				\
 		mlx_new_line.c					\
+		mlx_set_line_colours.c			\
 		mlx_render_lline.c				\
 		mlx_renderl_lline.c				\
 		mlx_new_world.c					\
@@ -59,6 +61,9 @@ SRC=	mlx_get_handler.c				\
 		mlx_put_line2d_to_image.c		\
 		mlx_set_image_pixel.c			\
 		mlx_new_colour.c				\
+		mlx_dup_colour.c				\
+		mlx_copy_colour.c				\
+		mlx_gradient_colours.c			\
 		mlx_get_colour_int.c			\
 		mlx_eqmul_complex.c
 
@@ -73,14 +78,14 @@ DIR=./
 OBJ=$(SRC:.c=.o)
 ASM=$(SRC:.c=.s)
 CC=gcc
-CFLAGS=-c -O3 -fstrict-aliasing -g -pg
+CFLAGS=-c -O3 -fstrict-aliasing -g 
 CWFLAGS=-Wall -Wextra -Wstrict-aliasing=2 #-Werror
 AR=ar
 ARFLAGS=rc
 RM=rm -f
 
 FT=-L $(FTDIR) -I $(FTDIR)/includes
-LIB=-lm -I/usr/local/include -L/usr/local/lib -lmlx -lXext -lX11
+LIB= -I/usr/local/include
 
 all:	$(NAME)
 

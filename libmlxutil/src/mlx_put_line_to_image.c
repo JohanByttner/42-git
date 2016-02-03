@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/24 00:29:35 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/03 18:54:06 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/03 20:45:13 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,25 @@ static void		mlx_line_put_line_to_image(t_3dline *line, t_mlx_image *im,
 			t_mlx_camera *camera, t_colour *colour)
 {
 	double		distance;
-	double		sinv;
-	double		cosv;
-	double		zv;
+	double		anglev[5];
+	t_colour	cgradient[3];
 
 	distance = mlx_line_get_distance(line);
-	cosv = (line->end->i - line->start->i) / distance;
-	sinv = (line->end->j - line->start->j) / distance;
-	zv = (line->end->k - line->start->k) / distance;
+	mlx_copy_colour(cgradient, line->colour);
+	mlx_copy_colour(&cgradient[1], line->colour2);
+	anglev[1] = (line->end->i - line->start->i) / distance;
+	anglev[0] = (line->end->j - line->start->j) / distance;
+	anglev[2] = (line->end->k - line->start->k) / distance;
+	anglev[3] = 1.0 / distance;
+	anglev[4] = 0;
 	while (distance-- >= 0)
 	{
-		mlx_line_put_point_to_image(line->start, im, colour, camera);
-		line->start->j += sinv;
-		line->start->i += cosv;
-		line->start->k += zv;
+		anglev[4] += anglev[3];
+		mlx_gradient_colours(cgradient + 2, cgradient, cgradient + 1, anglev[4]);
+		mlx_line_put_point_to_image(line->start, im, &cgradient[2], camera);
+		line->start->j += anglev[0];
+		line->start->i += anglev[1];
+		line->start->k += anglev[2];
 	}
 }
 
@@ -109,8 +114,9 @@ void	mlx_put_line_to_image(t_3dline *line, t_mlx_camera *c,
 
 	l2.start = mlx_line_eqget_cameraview(&p1, line->start, c);
 	l2.end = mlx_line_eqget_cameraview(&p2, line->end, c);
+	l2.colour = line->colour;
+	l2.colour2 = line->colour2;
 	if (!(mlx_eqget_line_cone_intersect(&l2)))
 		return ;
-	//ft_putchar('|');
 	mlx_line_put_line_to_image(&l2, im, c, colour);
 }
