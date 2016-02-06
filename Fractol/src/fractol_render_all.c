@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 22:54:03 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/13 22:55:54 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/06 14:43:23 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,6 @@ void	fractol_render_all(void)
 	{
 		fractol_render_julia(screen_count++);
 	}
+	if (config->render_burning_ship)
+		fractol_render_burning_ship(screen_count++);
 }

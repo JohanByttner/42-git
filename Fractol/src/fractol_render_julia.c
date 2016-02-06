@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 21:16:55 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/13 23:13:06 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/06 13:30:06 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 ** Note: does not check if render is legal
 */
 
-static void	fractol_check_julia_render(void)
+/*static void	fractol_check_julia_render(void)
 {
 	t_fractol_config	*config;
 
 	static
-}
+}*/
 
 void	fractol_render_julia(int screen_count)
 {

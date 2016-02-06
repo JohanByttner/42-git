@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 20:50:17 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/11 20:55:19 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/06 14:44:29 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int		fractol_load_images(void)
 				config->screen_height)))
 			fractol_exit(EX_SOFTWARE);
 	if (config->render_julia)
+		if (!(mlx_set_image(screen_count++, config->screen_width,
+				config->screen_height)))
+			fractol_exit(EX_SOFTWARE);
+	if (config->render_burning_ship)
 		if (!(mlx_set_image(screen_count++, config->screen_width,
 				config->screen_height)))
 			fractol_exit(EX_SOFTWARE);

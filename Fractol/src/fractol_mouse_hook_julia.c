@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 21:47:21 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/13 23:13:09 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/06 14:01:28 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,22 @@
 ** int	mouse_win3(int x,int y, void *p);
 */
 
-void	fractol_mouse_hook_julia(int x, int y, void *p)
+void	fractol_mouse_hook_julia(int i, int j, void *p)
 {
+	static t_complex	complex_julia_last;
+	static int counter  = 0;
 	t_fractol_config	*config;
 
+	printf("i was hit %d\n", counter++);
 	config = fractol_get_config();
-	if ((x == 101) && (51 <= y && y <= 151))
-			config->centre_julia.centre.j -= (y - 100) * FRACTOL_JULIA_CSCALE;
-	else if ((y == 101) && (51 <= x && x <= 151))
-	{
-			config->centre_julia.centre.i -= (x - 100) * FRACTOL_JULIA_CSCALE;
-		printf("%lf\n", config->centre_julia.centre.i);
-	}
-	else if ((50 < config->screen_width - x && config->screen_width - x < 151)
-			&& (50 < y && y < 151))
+	config->complex_julia.j += (j - complex_julia_last.j) * FRACTOL_JULIA_CSCALE;
+	complex_julia_last.j = j;
+	config->complex_julia.i -= (i - complex_julia_last.i) * FRACTOL_JULIA_CSCALE;
+	complex_julia_last.i = i;
+//	if ((50 < config->screen_width - i && config->screen_width - i < 151)
+//			&& (50 < j && j < 151))
 	{
 		printf("Re_rendering\n");
 		fractol_render_julia(config->render_julia - 1);
-
 	}
 }

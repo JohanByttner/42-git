@@ -6,9 +6,13 @@
 /*   By: jbyttner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/03 19:28:43 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/03 23:07:35 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/06 13:21:27 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** http://www.opensource.apple.com/source/tcl/tcl-87/tk/tk/xlib/X11/X.h
+*/
 
 #ifndef XHEADER_H
 # define XHEADER_H
@@ -16,6 +20,7 @@
 #  define XK_MISCELLANY 0
 #  define XK_LATIN1 0
 #  include <X11/keysymdef.h>
+#  include <X11/X.h>
 #  define XKC_A XK_a
 #  define XKC_B XK_b
 #  define XKC_C XK_c
@@ -80,6 +85,14 @@
 #  define XKC_PERIOD 47
 #  define XKC_SLASH 44
 #  define XKC_SEMICOLON 41
+#  define XNOEVENTMASK 0L
+#  define XKEYPRESSMASK (1L<<0)
+#  define XKEYRELEASEMASK (1L<<1)
+#  define XBUTTONPRESSMASK (1L<<2)
+#  define XENTERWINDOWMASK (1L<<3)
+#  define XLEAVEWINDOWMASK (1L<<4)
+#  define XPOINTERMOTIONMASK (1L<<5)
+#  define XMOTIONNOTIFY 6
 # else
 #  error Cannot map keys
 

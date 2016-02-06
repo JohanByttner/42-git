@@ -6,28 +6,12 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 22:14:16 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/13 21:55:47 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/06 14:41:29 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
 #include "fractol.h"
-
-static void		fractol_put_julia_size_bar_to_image(t_mlx_image *im)
-{
-	t_colour	navbar_colour;
-	t_point		p;
-
-	navbar_colour = (t_colour){ 255, 153, 51, 0 };
-	p.i = -im->size_x / 2 + 50;
-	p.j = -im->size_y / 2 + 100;
-	while (p.i++ < -im->size_x / 2 + 150)
-		mlx_put_point2d_to_image(&p, im, &navbar_colour);
-	p.i = -im->size_x / 2 + 100;
-	p.j = -im->size_y / 2 + 50;
-	while (p.j++ < -im->size_x / 2 + 150)
-		mlx_put_point2d_to_image(&p, im, &navbar_colour);
-}
 
 void			fractol_put_julia_to_image(t_mlx_image *im, t_centre *centre,
 			t_complex *c, t_colour *depth)
@@ -53,5 +37,4 @@ void			fractol_put_julia_to_image(t_mlx_image *im, t_centre *centre,
 			mlx_put_point2d_to_image(&p, im, &colour);
 		}
 	}
-	fractol_put_julia_size_bar_to_image(im);
 }

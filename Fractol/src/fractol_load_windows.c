@@ -6,12 +6,12 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 20:26:23 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/13 23:13:03 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/06 14:57:19 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sysexits.h>
-#include <X11/X.h>
+
 #include <mlx.h>
 #include "libmlxutil.h"
 #include "fractol.h"
@@ -58,8 +58,8 @@ int		fractol_load_windows(void)
 		//fractol_put_julia_to_image(im, &(config->centre_julia),
 		//		&(config->complex_julia), &(config->depth_julia));
 		fractol_render_julia(screen_count - 1);
-		mlx_hook(mlx_get_window(screen_count - 1)->window, MotionNotify,
-				PointerMotionMask, fractol_mouse_hook_julia, 0);
+		mlx_hook(mlx_get_window(screen_count - 1)->window, XMOTIONNOTIFY,
+				XPOINTERMOTIONMASK, fractol_mouse_hook_julia, 0);
 		mlx_key_hook(mlx_get_window(screen_count - 1)->window, 
 				fractol_key_hook, 0);
 	}

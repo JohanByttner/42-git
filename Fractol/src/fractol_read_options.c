@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 18:57:26 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/13 23:06:44 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/06 14:42:43 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int			fractol_read_options(int ac, char **av)
 			config->render_mandelbrot = screen_count++;
 		else if (!(ft_strcmp(av[i], "julia")))
 			config->render_julia = screen_count++;
+		else if (!(ft_strcmp(av[i], "ship")))
+			config->render_burning_ship = screen_count++;
 		else if (!(ft_strcmp(av[i], "--Resolution")))
 		{
 			if (i + 2 < ac && ft_strisdigit(av[i + 1])
