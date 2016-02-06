@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 20:26:23 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/06 14:57:19 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/06 17:56:03 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ int		fractol_load_windows(void)
 		im = fractol_load_window(screen_count++, "Mandelbrot");
 		fractol_put_mandelbrot_to_image(im, &(config->centre_mandelbrot),
 				&(config->depth_mandelbrot));
-		mlx_key_hook(mlx_get_window(screen_count - 1)->window, 
+		fractol_render_mandelbrot(screen_count - 1);
+		mlx_key_hook(mlx_get_window(screen_count - 1)->window,
 				fractol_key_hook, 0);
+		mlx_mouse_hook(mlx_get_window(screen_count - 1)->window,
+				fractol_mouse_hook_mandelbrot, 0);
 	}
 	if (config->render_julia)
 	{
@@ -62,6 +65,11 @@ int		fractol_load_windows(void)
 				XPOINTERMOTIONMASK, fractol_mouse_hook_julia, 0);
 		mlx_key_hook(mlx_get_window(screen_count - 1)->window, 
 				fractol_key_hook, 0);
+	}
+	if (config->render_burning_ship)
+	{
+		im = fractol_load_window(screen_count++, "Burning Ship");
+		fractol_render_burning_ship(screen_count - 1);
 	}
 	return (screen_count);
 }

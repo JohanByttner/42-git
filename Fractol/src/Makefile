@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/02/06 14:40:10 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/02/06 17:26:28 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,10 @@ SRC=	main.c								\
 		fractol_get_config.c				\
 		fractol_read_options.c				\
 		fractol_load_windows.c				\
+		fractol_render_mandelbrot.c			\
 		fractol_render_julia.c				\
 		fractol_render_burning_ship.c		\
+		fractol_mouse_hook_mandelbrot.c		\
 		fractol_mouse_hook_julia.c			\
 		fractol_key_hook.c					\
 		fractol_render_all.c				\
@@ -58,7 +60,7 @@ libmlxutil:
 
 $(NAME):	libft libmlxutil
 	$(CC) $(CFLAGS) -c -I$(INCDIR) $(SRC) -I/usr/local/include	\
-		-I libmlxutil/includes -I libft/includes	\
+		-I libmlxutil/includes -I libft	\
 		-I /usr/include/X11
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L $(LDDIR)	\
 		-lmlxutil -lft -lmlx $(LIBMAC) -lm

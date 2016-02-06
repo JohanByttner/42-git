@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 18:57:26 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/06 14:42:43 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/06 17:49:52 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@ static void	fractol_set_default_options(t_fractol_config *config)
 {
 	config->screen_width = 1000;
 	config->screen_height = 1000;
-	config->depth_julia = (t_colour){ 255, 9, 14, 0 };
+	config->depth_julia = (t_colour){ 2, 3, 5, 0 };
 	config->depth_mandelbrot = (t_colour) { 15, 0, 0, 0 };
 	config->centre_julia.radius = 2;
 	config->centre_mandelbrot.radius = 2;
 	config->complex_julia = (t_complex){ -0.70176, -0.3842 };
+	config->depth_burning_ship = (t_colour){ 10, 9, 2, 0 };
+	config->centre_burning_ship.radius = 2;
+	config->complex_burning_ship = (t_complex) { 0.45, 0.5 };
 }
 
 int			fractol_read_options(int ac, char **av)
