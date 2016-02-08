@@ -6,19 +6,27 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/01/21 20:59:27 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/02/08 17:26:56 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=fillit
-SRC=main.c					\
-		fillit_read_file.c	\
-		fillit_exit.c		\
-		get_next_line.c
+SRC=								\
+		fillit_read_file.c			\
+		fillit_exit.c				\
+		fillit_print_grid.c			\
+		fillit_validate_figures.c	\
+		fillit_check_grid_density.c	\
+		fillit_find_space.c			\
+		fillit_place_shape.c		\
+		fillit_solve_grid.c			\
+		get_next_line.c				\
+		main.c
+
 ROOTDIR=./
 LIBDIR= libft/ -lft
 BINDIR=$(ROOTDIR)./
-INCDIR=$(ROOTDIR)libft/includes -IGet_Next_Line/
+INCDIR=$(ROOTDIR)libft -IGet_Next_Line/
 BUILDDIR=$(ROOTDIR)./
 DIR=
 

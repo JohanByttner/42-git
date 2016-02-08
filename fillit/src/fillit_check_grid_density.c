@@ -6,13 +6,13 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 18:28:55 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/28 13:25:16 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/08 20:06:23 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static  void		fillit_reset_grid(char *grid, int size)
+static inline void		fillit_reset_grid(char *grid, int size)
 {
 	int		i;
 
@@ -22,34 +22,17 @@ static  void		fillit_reset_grid(char *grid, int size)
 			grid[i] = '.';
 }
 
-static int		fillit_expand_grid(char *grid, int start, int size)
+static int				fillit_expand_grid(char *grid, int start, int size)
 {
 	int		acc;
 	int		tmp;
 
 	acc = 0;
-	if (start > size * size)
-		acc = 0;
-	else if (grid[start] == '.')
+	if (!(start > size * size) && grid[start] == '.')
 	{
 		acc = 1;
 		grid[start] = '%';
 		tmp = 0;
-		/*if ((start + 1) % size && (tmp = fillit_expand_grid(grid, start + 1, size)) == -1)
-			return (-1);
-		acc += tmp;
-		if (1)
-		{
-			if ((tmp = fillit_expand_grid(grid, start + size, size)) == -1)
-				return (-1);
-			acc += tmp;
-		}
-		if ((start - 1) % size)
-		{
-			if ((tmp = fillit_expand_grid(grid, start - 1, size)) == -1)
-				return (-1);
-			acc += tmp;
-		}*/
 		if ((start) % size)
 		{
 			tmp = fillit_expand_grid(grid, start + 1, size);
@@ -63,14 +46,10 @@ static int		fillit_expand_grid(char *grid, int start, int size)
 			acc += tmp;
 		}
 	}
-	else if (grid[start] == '%')
-		return (0); //(-1);
-	else
-		acc = 0;
 	return (acc);
 }
 
-inline int		fillit_check_grid_density(char *grid)
+int						fillit_check_grid_density(char *grid)
 {
 	int		size[2];
 	int		i;
@@ -89,10 +68,7 @@ inline int		fillit_check_grid_density(char *grid)
 				acc = 0;
 			if ((size[1] -= acc) < 0)
 			{
-				//ft_putstr("\nReset printing grid\n");
-				///fillit_print_grid(grid);
 				fillit_reset_grid(grid, size[0]);
-				//fillit_print_grid(grid);
 				return (0);
 			}
 		}

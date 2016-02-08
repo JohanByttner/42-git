@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 16:46:19 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/25 14:36:25 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/08 17:55:11 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,16 @@ void	fillit_exit(int exit_code);
 
 int		**fillit_read_file(int fd);
 
-int		fillit_place_shape(int **shapes, char *grid, int pos[], int count);
+char	*fillit_solve_grid(int **shapes);
+
+int		fillit_validate_figures(int **ptr);
+
+int		fillit_check_grid_density(char *grid);
+
+int		fillit_place_shape(int **shapes, char *grid, int pos[],
+		int count);
 
 int		fillit_find_space(int **shapes, char *grid, int count);
-
-char	*fillit_validate_grid(int **shapes);
 
 void	fillit_print_grid(char *grid);
 
