@@ -6,11 +6,16 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 19:26:48 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/09 20:31:56 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/08 13:19:32 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
+
+/*
+** Get promise: Will always return a valid window ptr if mlx_set_window
+** has returned successfully (in the most recent call)
+*/
 
 t_mlx_window	*mlx_get_window(int wd)
 {

@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/02/03 20:34:58 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/02/08 12:46:25 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ SRC=	mlx_get_handler.c				\
 ROOTDIR=./
 LIBDIR=$(ROOTDIR)
 BINDIR=$(ROOTDIR)
-INCDIR=$(ROOTDIR)includes/ -I libft/includes
+INCDIR=$(ROOTDIR)includes/
 BUILDDIR=$(ROOTDIR)
 FTDIR=libft
 DIR=./
@@ -84,7 +84,7 @@ AR=ar
 ARFLAGS=rc
 RM=rm -f
 
-FT=-L $(FTDIR) -I $(FTDIR)/includes
+FT= -I $(FTDIR)
 LIB= -I/usr/local/include
 
 all:	$(NAME)
@@ -94,7 +94,7 @@ $(NAME):
 	$(AR) $(ARFLAGS) $(NAME) $(OBJ)
 
 asm:
-	$(CC) -S -O3 -fstrict-aliasing -masm=intel $(CWFLAGS) $(FT) -I$(INCDIR) $(SRC) $(LIB) -lft
+	$(CC) -S -O3 -fstrict-aliasing -masm=intel $(CWFLAGS) $(FT) -I$(INCDIR) $(SRC)
 
 clean:
 	$(RM) $(OBJ) $(ASM)

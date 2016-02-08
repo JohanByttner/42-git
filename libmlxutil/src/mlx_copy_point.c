@@ -6,13 +6,13 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/17 11:11:01 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/23 18:46:53 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/08 13:21:41 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
 
-t_3dpoint	*mlx_copy_point(t_3dpoint *copy, t_3dpoint *point)
+inline t_3dpoint	*mlx_copy_point(t_3dpoint *copy, t_3dpoint *point)
 {
 	copy->i = point->i;
 	copy->j = point->j;
