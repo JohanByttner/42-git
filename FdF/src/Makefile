@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/02/03 22:56:42 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/02/08 20:31:30 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,11 @@ SRC=	main.c							\
 		fdf_render_frame.c				\
 		fdf_key_hook.c					\
 		fdf_add_vertical_lines.c		\
-		print_matrix.c
-
 
 ROOTDIR=./
 LIBDIR=$(ROOTDIR)
 BINDIR=$(ROOTDIR)
-INCDIR=$(ROOTDIR)get_next_line/ -I libft/includes -I libmlxutil/includes	\
+INCDIR=$(ROOTDIR)get_next_line/ -I libft -I libmlxutil/includes	\
 					-I/usr/local/includes -I/usr/X11/includes
 LDDIR= libft/ -L libmlxutil/ -lmlxutil -lm -lft
 BUILDDIR=$(ROOTDIR)

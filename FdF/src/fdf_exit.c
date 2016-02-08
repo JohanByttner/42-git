@@ -6,11 +6,12 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 20:27:04 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/09 20:27:56 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/08 20:30:55 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "fdf.h"
 
 /*
 ** TODO: Add cleanup here

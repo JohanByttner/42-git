@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 19:18:45 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/03 16:24:24 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/08 18:24:19 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ static int		read_data_from_fd(int fd, t_list *heap, char **line)
 ** The list secretly stores t_mem pointers (see get_next_line.h)
 ** which can be retrieved with ((t_mem *)(ptr->content)) .
 ** Content length is set to give the length of the array in the t_mem object.
-** Warning: This is non-standard but legal behaviour. Please follow this convention
+** Warning: This is non-standard but legal behaviour.
+** Please follow this convention
 ** in this file.
 */
 
@@ -124,24 +125,17 @@ int				get_next_line(int fd, char **line)
 {
 	int				r;
 	t_list			*ptr;
-	//static t_list	**heap = 0;
 	static t_list	*heap = 0;
 	t_list			*cleanup;
 
-	//if (!heap)
-	//	heap = ft_memalloc(sizeof(t_list *));
-	//if (!(ptr = get_fd_ptr_from_heap(fd, line, heap)))
 	if (!(ptr = get_fd_ptr_from_heap(fd, line, &(heap))))
 		return (-1);
 	if ((r = read_data_from_fd(fd, ptr, line)))
 		return (r);
-	//if (ptr == *heap)
-	//	*heap = ptr->next;
 	if (ptr == heap)
 		heap = ptr->next;
 	else
 	{
-		//cleanup = *heap;
 		cleanup = heap;
 		while (cleanup && cleanup->next && cleanup->next != ptr)
 			cleanup = cleanup->next;

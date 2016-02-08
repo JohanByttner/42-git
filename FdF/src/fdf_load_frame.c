@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 17:13:46 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/03 19:32:40 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/08 20:33:49 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,4 @@ void	fdf_load_frame(t_list *llist)
 	else if (!(mlx_new_world(camera, img)))
 		fdf_exit(-4);
 	mlx_loadl_lline(img, llist);
-	print_matrix(camera->int_matrix);
 }

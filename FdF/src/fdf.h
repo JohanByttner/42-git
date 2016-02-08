@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 20:28:07 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/03 20:06:30 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/08 20:33:13 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 # include "libmlxutil.h"
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 # define FDF_SCREEN_WIDTH 1000
 # define FDF_SCREEN_HEIGHT 1000
 # define FDF_CAMERA_FOCUS 1
 # define FDF_MOVE_STEP 30
-# define PI 3.14159265
-# define FDF_ANGLE_STEP PI / 20.0
+# define FDF_ANGLE_STEP M_PI / 20.0
 
 void	fdf_exit(int status);
 

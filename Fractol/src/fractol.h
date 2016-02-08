@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 21:57:55 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/06 17:52:36 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/08 13:22:29 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FRACTOL_H
 # include "libmlxutil.h"
 # include <math.h>
+# include <stdio.h>
 # define FRACTOL_JULIA_CSCALE 0.0017
 # define JULIA_ITER_MAX 100
 
