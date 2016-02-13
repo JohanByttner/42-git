@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 19:57:54 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/08 20:07:08 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/13 14:56:42 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ int					**fillit_read_file(int fd)
 	if (!(ptr = ft_memalloc(sizeof(int *) * 28)))
 		fillit_exit(-7);
 	ctr = 0;
-	while (ctr < 27)
+	while (ctr < 26)
 	{
 		if ((fillit_read_figure(fd, ptr + ctr)) == 0)
 			break ;
 		ctr++;
 	}
-	if (ctr == 27)
+	if (ctr == 26)
 		fillit_exit(-80);
 	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/25 14:37:14 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/25 18:12:02 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/13 14:59:26 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	fillit_print_grid(char *grid)
 		write(1, "\n", 1);
 		i++;
 	}
+	free(grid);
 }

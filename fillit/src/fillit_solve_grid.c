@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/21 23:21:14 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/08 19:56:20 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/13 14:21:10 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ static inline char	*fillit_setup_grid(char *grid, char size, int num_figures)
 
 	if (grid)
 		free(grid);
-	if (!(grid = ft_memalloc(sizeof(char) * (size * size + 2))))
+	if (!(grid = ft_memalloc(sizeof(char)
+					* ((int)size * (int)size + 2))))
 		fillit_exit(-1);
 	grid[0] = size;
 	i = 0;
 	while (i++ < size * size)
 		grid[i] = '.';
-	grid[size * size + 1] = size * size - num_figures;
+	grid[size * size + 1] = (int)size * (int)size - num_figures;
 	return (grid);
 }
 

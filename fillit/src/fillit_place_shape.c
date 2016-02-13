@@ -6,7 +6,7 @@
 /*   By: jbyttner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/08 17:24:15 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/08 20:21:12 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/13 15:00:13 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int					fillit_place_shape(int **shapes, char *grid, int pos[],
 		grid_pos = 1 + offs[0] * (int)grid[0] + offs[1];
 		if (grid[grid_pos] == '.')
 		{
-			grid[grid_pos] = 'A' + count++ / 4;
+			grid[grid_pos] = 'A' + (count++ / 4);
 			if (count % 4)
 			{
 				if ((r = fillit_place_shape(shapes, grid, pos, count)) == 1)
