@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/02/20 16:48:29 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/02/20 18:34:37 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC=	mlx_get_handler.c				\
 		mlx_abs_point2d.c				\
 		mlx_eqadd_point2d.c				\
 		mlx_new_line.c					\
+		mlx_init_line.c					\
 		mlx_set_line_colours.c			\
 		mlx_render_lline.c				\
 		mlx_renderl_lline.c				\

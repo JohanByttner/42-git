@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 20:31:21 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/20 18:05:33 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 18:35:46 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,9 @@ t_point				*mlx_eqadd_point2d(t_point *restrict p1,
 						t_point *restrict p2);
 
 t_3dline			*mlx_new_line(t_3dpoint *p1, t_3dpoint *p2);
+
+t_3dline			*mlx_init_line(t_3dline *line, t_3dpoint *p1,
+						t_3dpoint *p2);
 
 t_3dline			*mlx_set_line_colours(t_3dline *line,
 						t_colour *c1, t_colour *c2);
