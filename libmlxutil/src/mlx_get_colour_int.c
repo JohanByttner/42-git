@@ -6,17 +6,18 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/23 18:29:33 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/16 18:50:08 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 17:54:14 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
 #include <mlx.h>
 
-int		mlx_get_colour_int(t_colour *restrict colour, t_mlx_image *restrict im)
+int					mlx_get_colour_int(t_colour *restrict colour,
+		t_mlx_image *restrict im)
 {
 	int				val;
-	unsigned char	*restrict ptr;
+	unsigned char	*ptr;
 
 	val = 0;
 	ptr = (unsigned char *)(&val);

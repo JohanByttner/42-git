@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 20:31:21 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/20 17:19:38 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 18:05:33 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,11 @@ t_3dpoint			*mlx_eqsub_point(t_3dpoint *res, t_3dpoint *sub);
 
 double				mlx_distance_points(t_3dpoint *p1, t_3dpoint *p2);
 
-t_fmatrix			*mlx_eqpoint_to_cameraview(t_fmatrix *point, t_mlx_camera *camera);
+t_fmatrix			*mlx_eqpoint_to_cameraview(t_fmatrix *point,
+						t_mlx_camera *camera);
 
-t_fmatrix			*mlx_eqpoint_to_coneview(t_fmatrix *point, t_mlx_camera *camera);
+t_fmatrix			*mlx_eqpoint_to_coneview(t_fmatrix *point,
+						t_mlx_camera *camera);
 
 t_point				*mlx_eqpoint_to_point2d(t_point *p1, t_3dpoint *p2);
 
