@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_put_linec_to_image.c                           :+:      :+:    :+:   */
+/*   mlx_eqpoint_to_point2d.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
+/*   By: jbyttner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/02 16:31:33 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/02 16:36:39 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/02/20 14:58:49 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/02/20 15:11:50 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
 
-void	mlx_put_linec_to_image(t_3dline *line, t_mlx_camera *camera,
-			t_mlx_image *im)
+inline t_point	*mlx_eqpoint_to_point2d(t_point *p1, t_3dpoint *p2)
 {
-	mlx_put_line_to_image(line, camera, im, line->colour);
+	p1->i = p2->i;
+	p1->j = p2->j;
+	return (p1);
 }

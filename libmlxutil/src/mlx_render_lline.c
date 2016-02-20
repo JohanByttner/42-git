@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:51:36 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/02 16:44:00 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 16:42:34 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	mlx_render_lline(t_list	*lline, t_mlx_camera *camera,
 	while (lline)
 	{
 		mlx_put_line_to_image((t_3dline *)(lline->content),
-				camera, img,
-				((t_3dline *)(lline->content))->colour);
+				camera, img);
 		lline = lline->next;
 	}
 }

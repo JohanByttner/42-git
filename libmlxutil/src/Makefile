@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/02/08 12:46:25 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/02/20 16:48:29 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,9 @@ SRC=	mlx_get_handler.c				\
 		mlx_abs_point.c					\
 		mlx_eqsub_point.c				\
 		mlx_distance_points.c			\
+		mlx_eqpoint_to_cameraview.c		\
+		mlx_eqpoint_to_coneview.c		\
+		mlx_eqpoint_to_point2d.c		\
 		mlx_copy_point2d.c				\
 		mlx_distance_points2d.c			\
 		mlx_abs_point2d.c				\
@@ -44,20 +47,17 @@ SRC=	mlx_get_handler.c				\
 		mlx_rotatek_camera.c			\
 		mlx_translate_camera.c			\
 		mlx_camera_record_pixel_depth.c	\
-		mlx_eqget_cameraview.c			\
-		mlx_eqget_coneview.c			\
 		mlx_new_fmatrix.c				\
 		mlx_eqmul_fmatrix.c				\
 		mlx_eqtranspose_fmatrix.c		\
 		mlx_eqfmatrix_to_point2d.c		\
 		mlx_eqfmatrix_to_point.c		\
 		mlx_eqpoint_to_fmatrix.c		\
-		mlx_eqget_point2d.c				\
-		mlx_eqget_point.c				\
 		mlx_put_point_to_image.c		\
+		mlx_render_point_to_image.c		\
 		mlx_put_point2d_to_image.c		\
 		mlx_put_line_to_image.c			\
-		mlx_put_linec_to_image.c		\
+		mlx_render_line_to_image.c		\
 		mlx_put_line2d_to_image.c		\
 		mlx_set_image_pixel.c			\
 		mlx_new_colour.c				\

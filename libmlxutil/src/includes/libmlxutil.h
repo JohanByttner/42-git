@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 20:31:21 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/08 12:42:31 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 16:48:45 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,12 @@ t_3dpoint			*mlx_eqsub_point(t_3dpoint *res, t_3dpoint *sub);
 
 double				mlx_distance_points(t_3dpoint *p1, t_3dpoint *p2);
 
+t_fmatrix			*mlx_eqpoint_to_cameraview(t_fmatrix *point, t_mlx_camera *camera);
+
+t_fmatrix			*mlx_eqpoint_to_coneview(t_fmatrix *point, t_mlx_camera *camera);
+
+t_point				*mlx_eqpoint_to_point2d(t_point *p1, t_3dpoint *p2);
+
 t_point				*mlx_copy_point2d(t_point *restrict copy,
 						t_point *restrict point);
 
@@ -210,13 +216,8 @@ t_mlx_camera		*mlx_rotatek_camera(t_mlx_camera *camera, double angle);
 
 t_mlx_camera		*mlx_translate_camera(t_mlx_camera *camera, t_3dpoint *t);
 
-int					mlx_camera_record_pixel_depth(t_fmatrix *pos,
+int					mlx_camera_record_pixel_depth(t_3dpoint *pos,
 						t_mlx_camera *camera);
-
-t_fmatrix			*mlx_eqget_cameraview(t_fmatrix *point,
-						t_mlx_camera *camera);
-
-t_fmatrix			*mlx_eqget_coneview(t_fmatrix *point, t_mlx_camera *camera);
 
 t_fmatrix			*mlx_new_fmatrix(size_t width, size_t height);
 
@@ -232,22 +233,19 @@ t_3dpoint			*mlx_eqfmatrix_to_point(t_3dpoint *p, t_fmatrix *m);
 
 t_fmatrix			*mlx_eqpoint_to_fmatrix(t_fmatrix *m, t_3dpoint *p);
 
-t_point				*mlx_eqget_point2d(t_point *res, t_3dpoint *input,
-						t_mlx_camera *camera);
-
-t_3dpoint			*mlx_eqget_point(t_3dpoint *res, t_3dpoint *input,
-						t_mlx_camera *camera);
-
 void				mlx_put_point_to_image(t_3dpoint *p, t_mlx_camera *c,
+						t_mlx_image *im, t_colour *colour);
+
+void				mlx_render_point_to_image(t_3dpoint *p, t_mlx_camera *c,
 						t_mlx_image *im, t_colour *colour);
 
 void				mlx_put_point2d_to_image(t_point *pt, t_mlx_image *im,
 						t_colour *colour);
 
 void				mlx_put_line_to_image(t_3dline *line, t_mlx_camera *c,
-						t_mlx_image *im, t_colour *colour);
+						t_mlx_image *im);
 
-void				mlx_put_linec_to_image(t_3dline *line, t_mlx_camera *camera,
+void				mlx_render_line_to_image(t_3dline *line, t_mlx_camera *c,
 						t_mlx_image *im);
 
 void				mlx_put_line2d_to_image(t_line *line, t_mlx_image *im,

@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/25 15:46:01 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/26 14:14:14 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 15:09:01 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,24 @@
 ** float value, FLOAT_MIN in <stdlib.h>
 */
 
-int		mlx_camera_record_pixel_depth(t_fmatrix *pt, t_mlx_camera *camera)
+int		mlx_camera_record_pixel_depth(t_3dpoint *pt, t_mlx_camera *camera)
 {
 	size_t	pixel;
 	double	x;
 	double	y;
 
-	x = (camera->size_x / 2) + (pt->value[0]);
-	x += (pt->value[0] >= 0 ? 0.5 : -0.5);
-	y = (camera->size_y / 2) + (pt->value[1]);
-	y += (pt->value[1] >= 0 ? 0.5 : -0.5);
+	x = (camera->size_x / 2) + (pt->i);
+	x += (pt->i >= 0 ? 0.5 : -0.5);
+	y = (camera->size_y / 2) + pt->j;
+	y += (pt->j >= 0 ? 0.5 : -0.5);
 	if (0 <= x && x < camera->size_x
 			&& 0 <= y && y < camera->size_y)
 	{
 		pixel = camera->size_x * (int)y + (int)x;
 		if (camera->pixel_render_depth[pixel] == 0
-				|| camera->pixel_render_depth[pixel] > pt->value[2])
+				|| camera->pixel_render_depth[pixel] > pt->k)
 		{
-			camera->pixel_render_depth[pixel] = pt->value[2];
+			camera->pixel_render_depth[pixel] = pt->k;
 			return (1);
 		}
 	}
