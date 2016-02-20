@@ -6,13 +6,12 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 21:47:21 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/06 17:49:08 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 21:09:45 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "fractol.h"
-#include <time.h>
 
 /*
 ** Discovered this goodie in minilibx/test/main.c
@@ -21,10 +20,8 @@
 ** int	mouse_win3(int x,int y, void *p);
 */
 
-void	fractol_mouse_hook_julia(int i, int j, void *p)
+int		fractol_mouse_hook_julia(int i, int j, void *p)
 {
-	static clock_t		past = 0;
-	clock_t				current;
 	static t_complex	complex_julia_last;
 	t_fractol_config	*config;
 
@@ -33,7 +30,6 @@ void	fractol_mouse_hook_julia(int i, int j, void *p)
 	complex_julia_last.j = j;
 	config->complex_julia.i -= (i - complex_julia_last.i) * FRACTOL_JULIA_CSCALE;
 	complex_julia_last.i = i;
-	current = clock();
-	if (past + 10000 < current)
-		fractol_render_julia(config->render_julia - 1);
+	config->set_julia_render = 1;
+	return ((int)p);
 }

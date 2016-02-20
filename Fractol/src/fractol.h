@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 21:57:55 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/08 13:22:29 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 21:27:51 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define FRACTOL_H
 # include "libmlxutil.h"
 # include <math.h>
-# include <stdio.h>
+# include <mlx.h>
 # define FRACTOL_JULIA_CSCALE 0.0017
 # define JULIA_ITER_MAX 100
+# define FRACTOL_KEY_MOVE 0.4
 
 typedef struct	s_centre
 {
@@ -35,13 +36,15 @@ typedef struct	s_fractol_config
 	t_colour	depth_julia;
 	t_centre	centre_julia;
 	t_complex	complex_julia;
+	int			set_julia_render;
 	int			render_mandelbrot;
 	t_colour	depth_mandelbrot;
 	t_centre	centre_mandelbrot;
+	int			set_mandelbrot_render;
 	int			render_burning_ship;
 	t_centre	centre_burning_ship;
 	t_colour	depth_burning_ship;
-	t_complex	complex_burning_ship;
+	int			set_burning_ship_render;
 	int			screen_width;
 	int			screen_height;
 }				t_fractol_config;
@@ -61,25 +64,29 @@ void					fractol_put_julia_to_image(t_mlx_image *img,
 				t_centre *centre, t_complex *c, t_colour *depth);
 
 void					fractol_put_burning_ship_to_image(t_mlx_image *img,
-				t_centre *centre, t_complex *c, t_colour *depth);
+				t_centre *centre, t_colour *depth);
 
 int						fractol_read_options(int ac, char **av);
 
 int						fractol_load_windows(void);
 
-void					fractol_render_julia(int screen_count);
+void					fractol_render_mandelbrot(int wd);
 
-void					fractol_render_burning_ship(int screen_count);
+void					fractol_render_julia(int wd);
 
-void					fractol_mouse_hook_julia(int x, int y, void *param);
+void					fractol_render_burning_ship(int wd);
 
-void					fractol_mouse_hook_mandelbrot(int button, int x, int y,
+int						fractol_mouse_hook_julia(int x, int y, void *param);
+
+int						fractol_mouse_hook_mandelbrot(int button, int x, int y,
 				void *param);
 
-void					fractol_key_hook(int keycode, void *param);
+int						fractol_key_hook(int keycode, void *param);
 
-void					fractol_render_all(void);
+int						fractol_render_all(void *param);
 
 void					fractol_exit(int exit_code);
+
+void					fractol_force_render(void);
 
 #endif

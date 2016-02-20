@@ -6,7 +6,7 @@
 /*   By: jbyttner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 14:38:08 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/06 16:56:35 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 20:48:54 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 void			fractol_put_burning_ship_to_image(t_mlx_image *im,
-			t_centre *centre, t_complex *c, t_colour *depth)
+			t_centre *centre, t_colour *depth)
 {
 	t_point		p;
 	t_complex	z;

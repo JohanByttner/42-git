@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 18:57:26 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/08 13:30:21 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 21:40:27 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	fractol_set_default_options(t_fractol_config *config)
 	config->complex_julia = (t_complex){ -0.70176, -0.3842 };
 	config->depth_burning_ship = (t_colour){ 10, 9, 2, 0 };
 	config->centre_burning_ship.radius = 2;
-	config->complex_burning_ship = (t_complex) { 0.45, 0.5 };
+	fractol_force_render();
 }
 
 int			fractol_read_options(int ac, char **av)
@@ -54,12 +54,12 @@ int			fractol_read_options(int ac, char **av)
 	fractol_set_default_options(config);
 	while (++i < ac)
 	{
-		if (!(ft_strcmp(av[i], "mandelbrot")))
-			config->render_mandelbrot = screen_count++;
-		else if (!(ft_strcmp(av[i], "julia")))
-			config->render_julia = screen_count++;
-		else if (!(ft_strcmp(av[i], "ship")))
-			config->render_burning_ship = screen_count++;
+		if (!ft_strcmp(av[i], "mandelbrot") && !config->render_mandelbrot)
+				config->render_mandelbrot = screen_count++;
+		else if (!ft_strcmp(av[i], "julia") && !config->render_julia)
+				config->render_julia = screen_count++;
+		else if (!ft_strcmp(av[i], "ship") && !config->render_burning_ship)
+				config->render_burning_ship = screen_count++;
 		else if (!(ft_strcmp(av[i], "--Resolution")))
 		{
 			if (i + 2 < ac && ft_strisdigit(av[i + 1])

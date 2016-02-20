@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_render_mandelbrot.c                        :+:      :+:    :+:   */
+/*   fractol_force_render.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbyttner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/06 17:24:49 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/20 21:16:05 by jbyttner         ###   ########.fr       */
+/*   Created: 2016/02/20 21:26:26 by jbyttner          #+#    #+#             */
+/*   Updated: 2016/02/20 21:27:34 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "fractol.h"
 
-void	fractol_render_mandelbrot(int screen_count)
+void	fractol_force_render(void)
 {
 	t_fractol_config	*config;
 
 	config = fractol_get_config();
-	if (config->set_mandelbrot_render)
-	{
-		config->set_mandelbrot_render = 0;
-		fractol_put_mandelbrot_to_image(mlx_get_image(screen_count),
-			&(config->centre_mandelbrot),
-			&(config->depth_mandelbrot));
-		mlx_put_image_to_window(mlx_get_handler()->init,
-			mlx_get_window(screen_count)->window,
-			mlx_get_image(screen_count)->image, 0, 0);
-	}
+	config->set_mandelbrot_render = 1;
+	config->set_julia_render = 1;
+	config->set_burning_ship_render = 1;
 }

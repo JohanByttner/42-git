@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/02/06 17:26:28 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/02/20 21:29:26 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRC=	main.c								\
 		fractol_mouse_hook_julia.c			\
 		fractol_key_hook.c					\
 		fractol_render_all.c				\
-		fractol_exit.c
+		fractol_exit.c						\
+		fractol_force_render.c
 
 ROOTDIR=./
 LIBDIR=$(ROOTDIR)
