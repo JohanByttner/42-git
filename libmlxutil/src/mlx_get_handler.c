@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 19:26:30 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/08 13:14:35 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 17:49:10 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 ** Get Promise: will never return null if successfully called once
 ** Only need to check null value for first call
 */
-
 
 t_mlx_handler	*mlx_get_handler(void)
 {

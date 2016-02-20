@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/24 00:35:18 by jbyttner          #+#    #+#             */
-/*   Updated: 2015/12/26 11:40:35 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 17:50:47 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ void	mlx_put_line2d_to_image(t_line *line, t_mlx_image *im,
 	}
 	mlx_put_point2d_to_image(line->end, im, colour);
 }
-

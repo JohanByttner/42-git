@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/24 00:29:35 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/20 16:49:51 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 17:47:04 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ static t_3dpoint	*mlx_line_eqget_cameraview(t_3dpoint *res,
 	return (res);
 }
 
-void	mlx_put_line_to_image(t_3dline *line, t_mlx_camera *c,
+void				mlx_put_line_to_image(t_3dline *line, t_mlx_camera *c,
 			t_mlx_image *im)
 {
 	t_3dline	l2;
-	t_3dpoint		p1;
-	t_3dpoint		p2;
+	t_3dpoint	p1;
+	t_3dpoint	p2;
 
 	l2.start = mlx_line_eqget_cameraview(&p1, line->start, c);
 	l2.end = mlx_line_eqget_cameraview(&p2, line->end, c);

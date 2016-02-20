@@ -6,13 +6,13 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 13:51:36 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/20 16:42:34 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 17:44:25 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmlxutil.h"
 
-void	mlx_render_lline(t_list	*lline, t_mlx_camera *camera,
+void	mlx_render_lline(t_list *lline, t_mlx_camera *camera,
 			t_mlx_image *img)
 {
 	while (lline)

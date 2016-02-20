@@ -6,7 +6,7 @@
 /*   By: jbyttner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/20 15:16:18 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/20 16:41:46 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 17:46:34 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static inline void	mlx_render_line_coneview(t_3dpoint *p1, t_3dpoint *p2,
 	mlx_eqfmatrix_to_point(p2, &tmp);
 }
 
-inline void	mlx_render_line_to_image(t_3dline *line, t_mlx_camera *camera,
-		t_mlx_image *im)
+inline void			mlx_render_line_to_image(t_3dline *line,
+		t_mlx_camera *camera, t_mlx_image *im)
 {
 	t_3dpoint	points[2];
 	double		distance;

@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/23 17:14:20 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/20 15:03:22 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 17:45:27 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		mlx_put_point_to_image(t_3dpoint *p, t_mlx_camera *c,
 {
 	t_fmatrix		cameraview;
 	double			cameraview_arr[4];
-	t_3dpoint			out;
+	t_3dpoint		out;
 
 	cameraview.value = cameraview_arr;
 	mlx_eqpoint_to_fmatrix(&cameraview, p);
