@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 16:56:45 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/01/02 18:32:06 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 18:10:28 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	fdf_render_frame(void)
 	t_mlx_image		*img;
 	t_mlx_window	*window;
 
-	if (!(window = mlx_get_window(0)) || !(img = mlx_get_image(0)))
+	if (!(window = mlx_get_window(0))
+			|| !(img = mlx_get_image(0)))
 		return ;
 	mlx_clear_image(img);
 	mlx_render_image(img);

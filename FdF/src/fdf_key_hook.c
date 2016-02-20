@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 17:44:18 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/03 23:07:21 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 18:10:50 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	fdf_key_hook_one(int keycode, t_mlx_camera *camera)
 		mlx_translate_camera(camera, &p);
 	}
 	else
-		return fdf_key_hook_two(keycode, camera);
+		return (fdf_key_hook_two(keycode, camera));
 	return (1);
 }
 

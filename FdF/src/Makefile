@@ -6,7 +6,7 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/02/08 20:31:30 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/02/20 17:26:59 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC=	main.c							\
 		fdf_render_frame.c				\
 		fdf_key_hook.c					\
 		fdf_add_vertical_lines.c		\
+		fdf_new_colour.c
 
 ROOTDIR=./
 LIBDIR=$(ROOTDIR)

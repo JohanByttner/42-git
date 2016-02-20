@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 17:24:36 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/08 20:33:36 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 19:12:51 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		main(int ac, char **av)
 {
 	int				fd;
 	t_list			*list;
+	t_mlx_handler	*handler;
 
 	if (ac != 2)
 		return (0);
@@ -37,6 +38,7 @@ int		main(int ac, char **av)
 	fdf_add_vertical_lines(list);
 	fdf_load_frame(list);
 	mlx_key_hook(mlx_get_window(0)->window, fdf_key_hook, 0);
-	mlx_loop(mlx_get_handler()->init);
+	if ((handler = mlx_get_handler()))
+		mlx_loop(handler->init);
 	return (0);
 }

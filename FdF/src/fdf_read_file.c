@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/26 17:19:52 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/03 20:54:04 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 19:06:55 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_list	*fdf_read_row_line(char *s1, char *s2, int row, int index)
 {
 	t_3dpoint	p1;
 	t_3dpoint	p2;
-	t_3dline	*line;
+	t_3dline	line;
 	t_colour	*colour;
 
 	p1.k = -ft_atoi(s1);
@@ -34,15 +34,16 @@ static t_list	*fdf_read_row_line(char *s1, char *s2, int row, int index)
 	p2.k = -ft_atoi(s2);
 	p2.i = (index + 1) * FDF_SCALING;
 	p2.j = row * FDF_SCALING;
-	if (!(line = mlx_new_line(&p1, &p2)))
+	if (!(mlx_init_line(&line, &p1, &p2)))
 		return (0);
-	if (!(line->colour = mlx_new_colour(0, (unsigned char)(-p1.k * 15 + 100), 0, -1))
-		|| !(line->colour2 = mlx_new_colour(0, (unsigned char)(-p2.k * 15 + 100), 0, -1)))
+	if (!(line.colour = fdf_new_colour(&p1))
+		|| !(line.colour2 = fdf_new_colour(&p2)))
 		{
-			free(line);
+			if (line.colour)
+				free(line.colour);
 			return (0);
 		}
-	return (ft_lstnew(line, sizeof(*line)));
+	return (ft_lstnew(&line, sizeof(line)));
 }
 
 static void		fdf_read_row(char *line, int row, t_list **alst)
@@ -60,18 +61,15 @@ static void		fdf_read_row(char *line, int row, t_list **alst)
 	{
 		s1 = s2;
 		ft_lstadd(alst, fdf_read_row_line(s1, s2, row, index));
-		//free(s1);
 	}
 	else
-		while (*(++strp))
+		while ((strp[index + 1]))
 		{
 			s1 = s2;
-			s2 = *strp;
+			s2 = strp[index + 1];
 			ft_lstadd(alst, fdf_read_row_line(s1, s2, row, ++index));
-			//free(s1);
 		}
-	//free(s2);
-	//free(strp);
+	ft_strarrclr(strp);
 }
 
 /*
@@ -96,8 +94,9 @@ t_list	*fdf_read_file(int fd)
 		if (tmp)
 		{
 			ft_lstadd(&out, ft_lstnew(tmp, sizeof(t_list)));
-			////free(tmp);
+			free(tmp);
 		}
+		free(line);
 	}
 	return (out);
 }
