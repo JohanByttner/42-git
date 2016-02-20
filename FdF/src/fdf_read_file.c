@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/26 17:19:52 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/20 19:06:55 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/20 19:16:04 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ static void		fdf_read_row(char *line, int row, t_list **alst)
 		ft_lstadd(alst, fdf_read_row_line(s1, s2, row, index));
 	}
 	else
-		while ((strp[index + 1]))
+		while ((strp[index + 2]))
 		{
 			s1 = s2;
-			s2 = strp[index + 1];
+			s2 = strp[index + 2];
 			ft_lstadd(alst, fdf_read_row_line(s1, s2, row, ++index));
 		}
 	ft_strarrclr(strp);

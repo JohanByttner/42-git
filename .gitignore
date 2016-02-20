@@ -47,6 +47,7 @@ Thumbs.db
 # 42 specific #
 libft.a
 libmlxutil.a
+fillit/src/fillit
 FdF/src/fdf
 Fractol/src/fractol
 wolf3d
