@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 17:44:18 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/20 18:10:50 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/22 18:38:29 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,18 @@ int	fdf_key_hook_one(int keycode, t_mlx_camera *camera)
 
 int	fdf_key_hook(int keycode, void *param)
 {
+	t_fdf_window	*window;
 	t_mlx_camera	*camera;
 
-	if (!(camera = mlx_get_image(0)->world->camera))
-		return (0);
-	else if (keycode == XKC_ESCAPE)
-		fdf_exit(0 && param);
+	window = (t_fdf_window *)param;
+
+	camera = mlx_get_image(window->wd)->world->camera;
+	if (keycode == XKC_ESCAPE)
+		fdf_exit(0);
 	else if (fdf_key_hook_one(keycode, camera))
 	{
 		ft_putstr("Rendering\n");
-		fdf_render_frame();
+		fdf_render_frame(window->wd);
 	}
 	return (0);
 }
