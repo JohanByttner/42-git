@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/11 20:26:23 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/20 21:30:54 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/22 20:14:18 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ static inline void	burning_ship_load_window(int wd, t_fractol_config *config)
 	fractol_render_burning_ship(wd);
 	mlx_key_hook(mlx_get_window(wd)->window,
 			fractol_key_hook, &(config->centre_burning_ship));
+	mlx_mouse_hook(mlx_get_window(wd)->window,
+			fractol_mouse_hook_burning_ship, 0);
+
 }
 
 int		fractol_load_windows(void)

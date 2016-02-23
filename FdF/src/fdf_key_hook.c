@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 17:44:18 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/22 18:38:29 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/23 15:08:49 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,35 @@ int	fdf_key_hook_one(int keycode, t_mlx_camera *camera)
 	return (1);
 }
 
+int	fdf_key_hook_camera(int keycode, t_fdf_window *window)
+{
+	t_mlx_camera	*camera;
+
+	if (keycode == XKC_B)
+		window->current_cam = 0;
+	else if (keycode == XKC_N)
+		window->current_cam = 1;
+	else if (keycode == XKC_M)
+		window->current_cam = 2;
+	else
+	{
+		camera = window->cameras[window->current_cam];
+		return (fdf_key_hook_one(keycode, camera));
+	}
+	return (1);
+}
+
 int	fdf_key_hook(int keycode, void *param)
 {
 	t_fdf_window	*window;
-	t_mlx_camera	*camera;
 
 	window = (t_fdf_window *)param;
-
-	camera = mlx_get_image(window->wd)->world->camera;
 	if (keycode == XKC_ESCAPE)
 		fdf_exit(0);
-	else if (fdf_key_hook_one(keycode, camera))
+	else if (fdf_key_hook_camera(keycode, window))
 	{
+		mlx_get_image(window->wd)->world->camera = window->
+			cameras[window->current_cam];
 		ft_putstr("Rendering\n");
 		fdf_render_frame(window->wd);
 	}

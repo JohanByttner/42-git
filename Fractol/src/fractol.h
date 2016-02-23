@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/10 21:57:55 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/20 21:27:51 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/22 20:13:36 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ int						fractol_mouse_hook_julia(int x, int y, void *param);
 
 int						fractol_mouse_hook_mandelbrot(int button, int x, int y,
 				void *param);
+
+int						fractol_mouse_hook_burning_ship(int button,
+				int x, int y, void *param);
 
 int						fractol_key_hook(int keycode, void *param);
 

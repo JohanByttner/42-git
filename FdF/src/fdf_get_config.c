@@ -6,33 +6,38 @@
 /*   By: jbyttner <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 14:27:47 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/22 19:45:02 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/23 15:31:29 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static t_mlx_camera	**fdf_init_cameras(t_fdf_window *wptr)
+static t_mlx_camera		**fdf_init_cameras(t_fdf_window *wptr)
 {
 	t_mlx_camera		**cameras;
 	int					i;
+	t_3dpoint			p;
 
+	p = (t_3dpoint){ 80, 80, -150 };
 	if (!(cameras = malloc(sizeof(t_mlx_camera *) * FDF_NUM_CAMERAS)))
 		fdf_exit(0);
 	i = 0;
 	while (i < FDF_NUM_CAMERAS)
 	{
-		cameras[i] = mlx_new_camera(FDF_CAMERA_FOCUS,
-				wptr->size_x, wptr->size_y);
+		if (!(cameras[i] = mlx_new_camera(FDF_CAMERA_FOCUS,
+				wptr->size_x, wptr->size_y)))
+			exit(-50);
+		mlx_translate_camera(cameras[i], &p);
 		i++;
 	}
+	wptr->current_cam = 0;
 	return (cameras);
 }
 
-static void		fdf_get_screen_size(int argc, int *args, char **argv,
-		t_fdf_window *wptr)
+static void				fdf_get_screen_size(int argc, int *args,
+		char **argv, t_fdf_window *wptr)
 {
-	int			size[2];
+	int					size[2];
 
 	size[0] = FDF_SCREEN_WIDTH;
 	size[1] = FDF_SCREEN_HEIGHT;
@@ -47,18 +52,20 @@ static void		fdf_get_screen_size(int argc, int *args, char **argv,
 		*args += 3;
 	}
 	else if (*args + 2 < argc && !ft_strcmp(argv[*args], "--Screen"))
-			ft_putendl("Error: incorrect size arguments. Using defaults");
-		else
-			ft_putendl("No size arguments. Using defaults");
-	wptr->size_x = (FDF_SCREEN_MAX >= size[0] && size[0] > 0 ? size[0] : FDF_SCREEN_WIDTH);
-	wptr->size_y = (FDF_SCREEN_MAX >= size[1] && size[1] > 0 ? size[1] : FDF_SCREEN_HEIGHT);
+		ft_putendl("Error: incorrect size arguments. Using defaults");
+	else
+		ft_putendl("No size arguments. Using defaults");
+	wptr->size_x = (FDF_SCREEN_MAX >= size[0]
+			&& size[0] > 0 ? size[0] : FDF_SCREEN_WIDTH);
+	wptr->size_y = (FDF_SCREEN_MAX >= size[1]
+			&& size[1] > 0 ? size[1] : FDF_SCREEN_HEIGHT);
 }
 
 /*
 ** This is a bonus part (setting gradients), so we can use atof.
 */
 
-static void			fdf_set_gradients(int argc, int *args, char **argv,
+static void				fdf_set_gradients(int argc, int *args, char **argv,
 		t_fdf_window *wptr)
 {
 	wptr->red = (t_fdf_gradient){ 1.0, 0.0 };
@@ -87,7 +94,8 @@ static void			fdf_set_gradients(int argc, int *args, char **argv,
 	}
 }
 
-static t_fdf_window	*fdf_get_window(int argc, int *args, char **argv, int cnt)
+static t_fdf_window		*fdf_get_window(int argc, int *args,
+		char **argv, int cnt)
 {
 	t_fdf_window		*wptr;
 	char				*name;
@@ -112,15 +120,14 @@ static t_fdf_window	*fdf_get_window(int argc, int *args, char **argv, int cnt)
 	return (wptr);
 }
 
-t_fdf_config		*fdf_get_config(int argc, char **argv)
+t_fdf_config			*fdf_get_config(int argc, char **argv)
 {
 	static t_fdf_config	config;
 	int					args;
 	int					cnt;
 
-	if (argc == 0 && argv == 0)
+	if ((args = 1) && argc == 0 && argv == 0)
 		return (&config);
-	args = 1;
 	config.current = 0;
 	if (!(config.windows = malloc(sizeof(t_fdf_window *)
 					* MLX_MAX_WINDOW_COUNT)))
@@ -129,14 +136,11 @@ t_fdf_config		*fdf_get_config(int argc, char **argv)
 	while (args < argc && cnt < MLX_MAX_WINDOW_COUNT)
 	{
 		if (!(config.windows[cnt] = fdf_get_window(argc, &args, argv, cnt)))
-		{
 			args++;
-			continue ;
-		}
-		cnt++;
+		else
+			cnt++;
 	}
-	config.window_count = cnt;
-	if (cnt == MLX_MAX_WINDOW_COUNT)
+	if ((config.window_count = cnt) == MLX_MAX_WINDOW_COUNT)
 	{
 		ft_putstr("Error: Too many windows, opening ");
 		ft_putnbr(MLX_MAX_WINDOW_COUNT);

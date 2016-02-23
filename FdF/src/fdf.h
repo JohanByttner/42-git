@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 20:28:07 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/22 19:33:47 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/22 20:36:40 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include "libmlxutil.h"
 # include "libft.h"
-# define FDF_SCREEN_WIDTH 500
+# define FDF_SCREEN_WIDTH 1000
 # define FDF_SCREEN_HEIGHT 1000
 # define FDF_CAMERA_FOCUS 1
 # define FDF_MOVE_STEP 30
@@ -42,6 +42,7 @@ typedef struct		s_fdf_window
 	int				size_x;
 	int				size_y;
 	int				num_cameras;
+	int				current_cam;
 	t_mlx_camera	**cameras;
 	const char		*name;
 	t_fdf_gradient	red;

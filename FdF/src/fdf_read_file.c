@@ -6,7 +6,7 @@
 /*   By: jbyttner <jbyttner@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/26 17:19:52 by jbyttner          #+#    #+#             */
-/*   Updated: 2016/02/20 19:16:04 by jbyttner         ###   ########.fr       */
+/*   Updated: 2016/02/23 15:17:44 by jbyttner         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static t_list	*fdf_read_row_line(char *s1, char *s2, int row, int index)
 		return (0);
 	if (!(line.colour = fdf_new_colour(&p1))
 		|| !(line.colour2 = fdf_new_colour(&p2)))
-		{
-			if (line.colour)
-				free(line.colour);
-			return (0);
-		}
+	{
+		if (line.colour)
+			free(line.colour);
+		return (0);
+	}
 	return (ft_lstnew(&line, sizeof(line)));
 }
 
@@ -56,7 +56,7 @@ static void		fdf_read_row(char *line, int row, t_list **alst)
 	strp = ft_strsplit(line, ' ');
 	index = -1;
 	if (!(strp) || !(s2 = *strp))
-        ;
+		;
 	else if (!(*(strp + 1)))
 	{
 		s1 = s2;
@@ -76,12 +76,12 @@ static void		fdf_read_row(char *line, int row, t_list **alst)
 ** Returns a list of lists
 */
 
-t_list	*fdf_read_file(int fd)
+t_list			*fdf_read_file(int fd)
 {
-	t_list	*tmp;
-	t_list	*out;
-	char	*line;
-	int		row;
+	t_list		*tmp;
+	t_list		*out;
+	char		*line;
+	int			row;
 
 	row = 0;
 	out = 0;
