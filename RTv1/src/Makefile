@@ -6,22 +6,23 @@
 #    By: jbyttner <jbyttner@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/09/21 16:00:38 by jbyttner          #+#    #+#              #
-#    Updated: 2016/02/23 17:20:46 by jbyttner         ###   ########.fr        #
+#    Updated: 2016/02/25 21:14:33 by jbyttner         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=fdf
-SRC=	main.c							\
-		fdf_exit.c						\
-		fdf_read_file.c					\
-		get_next_line.c					\
-		fdf_load_frame.c				\
-		fdf_render_frame.c				\
-		fdf_key_hook.c					\
-		fdf_add_vertical_lines.c		\
-		fdf_new_colour.c				\
-		fdf_get_config.c				\
-		fdf_read_files.c
+SRC=	rt_eqintersect_sphere.c					\
+		rt_ray_trace.c			
+	
+
+
+
+
+
+
+
+
+
 
 ROOTDIR=./
 LIBDIR=$(ROOTDIR)
@@ -36,6 +37,9 @@ LIBLX= -L/usr/local/lib -lmlx -lXext -lX11
 LIBMAC= -I libmlxutil/minilibx_macox/includes \
     -L libmlxutil/minilibx_macos -lmlx -framework OpenGL -framework AppKit
 
+SRC_PATH = ./srcs/
+
+SRC =	$(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ=$(SRC:.c=.o)
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror
